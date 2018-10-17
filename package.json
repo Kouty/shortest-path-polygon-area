@@ -4,7 +4,9 @@
   "description": "JavaScript shortest path inside a polygon area with holes",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "prettify": "prettier --write ./src/**/*.js ./test/**/*.js",
+    "eslint": "eslint ./src/**/*.js ./test/**/*.js "
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,10 @@
   "homepage": "https://gitlab.com/kouty79/shortest-path-polygon-area#README",
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^5.2.0"
+    "eslint": "^5.7.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "mocha": "^5.2.0",
+    "prettier": "1.14.3"
   }
 }
