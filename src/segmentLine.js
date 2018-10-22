@@ -8,7 +8,13 @@ export function segmentLineSide([s1, s2], line) {
     return side1 === pointLineSide.LEFT ? segmentLineSide.LEFT : segmentLineSide.RIGHT;
   }
 
+  if(side1 === pointLineSide.ABOVE || side2 === pointLineSide.ABOVE) {
+    return;
+  }
+
+  return segmentLineSide.INTERSECTION;
 }
 
 segmentLineSide.LEFT = Symbol('segmentLineSide.LEFT');
 segmentLineSide.RIGHT = Symbol('segmentLineSide.RIGHT');
+segmentLineSide.INTERSECTION = Symbol('segmentLineSide.INTERSECTION');

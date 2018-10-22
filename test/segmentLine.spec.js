@@ -16,4 +16,12 @@ describe('Segment-line', () => {
   it('should consider the segment [[2,1],[5,3]] on the RIGHT of line [[0,0], [3,3]]', () => {
     expect(segmentLineSide([[2, 1], [5, 3]], [[0, 0], [3, 3]])).toBe(segmentLineSide.RIGHT);
   });
+
+  it('should define INTERSECTION enum item', () => {
+    expect(segmentLineSide.INTERSECTION).not.toBeUndefined();
+  });
+
+  it('should consider the segment [[2,1],[3,5]] on INTERSECT line [[0,0], [10,10]]', () => {
+    expect(segmentLineSide([[2, 1], [3, 5]], [[0, 0], [10, 10]])).toBe(segmentLineSide.INTERSECTION);
+  });
 });
