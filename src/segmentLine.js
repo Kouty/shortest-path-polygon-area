@@ -11,3 +11,4 @@ export function segmentLineSide([s1, s2], line) {
 }
 
 segmentLineSide.LEFT = Symbol('segmentLineSide.LEFT');
+segmentLineSide.RIGHT = Symbol('segmentLineSide.RIGHT');
