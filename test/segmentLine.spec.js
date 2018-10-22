@@ -21,7 +21,31 @@ describe('Segment-line', () => {
     expect(segmentLineSide.INTERSECTION).not.toBeUndefined();
   });
 
-  it('should consider the segment [[2,1],[3,5]] on INTERSECT line [[0,0], [10,10]]', () => {
+  it('should consider the segment [[2,1],[3,5]] to INTERSECT line [[0,0], [10,10]]', () => {
     expect(segmentLineSide([[2, 1], [3, 5]], [[0, 0], [10, 10]])).toBe(segmentLineSide.INTERSECTION);
+  });
+
+  it('should define ABOVE_1 enum item', () => {
+    expect(segmentLineSide.ABOVE_1).not.toBeUndefined();
+  });
+
+  it('should consider the segment [[2,2],[3,5]] to be ABOVE_1 line [[0,0], [10,10]]', () => {
+    expect(segmentLineSide([[2, 2], [3, 5]], [[0, 0], [10, 10]])).toBe(segmentLineSide.ABOVE_1);
+  });
+
+  it('should define ABOVE_2 enum item', () => {
+    expect(segmentLineSide.ABOVE_2).not.toBeUndefined();
+  });
+
+  it('should consider the segment [[2,3],[5,5]] to be ABOVE_2 line [[0,0], [10,10]]', () => {
+    expect(segmentLineSide([[2, 3], [5, 5]], [[0, 0], [10, 10]])).toBe(segmentLineSide.ABOVE_2);
+  });
+
+  it('should define ABOVE_1_2 enum item', () => {
+    expect(segmentLineSide.ABOVE_1_2).not.toBeUndefined();
+  });
+
+  it('should consider the segment [[2,2],[5,5]] to be ABOVE_1_2 line [[0,0], [10,10]]', () => {
+    expect(segmentLineSide([[2, 2], [5, 5]], [[0, 0], [10, 10]])).toBe(segmentLineSide.ABOVE_1_2);
   });
 });

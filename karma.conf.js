@@ -1,4 +1,5 @@
 const webpackConf = require('./webpack.config.js');
+webpackConf.mode = 'development';
 
 module.exports = function(config) {
   config.set({
