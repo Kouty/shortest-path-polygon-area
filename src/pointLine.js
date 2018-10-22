@@ -13,7 +13,11 @@ export function pointLineSide([x, y], [[x1, y1], [x2, y2]], precision = 0) {
   }
 
   const d = (x - x1) * (y2 - y1) - (y - y1) * (x2 - x1);
-  return d < 0 ? pointLineSide.LEFT : (d === 0) ? pointLineSide.ABOVE : pointLineSide.RIGHT;
+  return d < 0
+    ? pointLineSide.LEFT
+    : d === 0
+      ? pointLineSide.ABOVE
+      : pointLineSide.RIGHT;
 }
 
 pointLineSide.LEFT = Symbol('pointLineSide.LEFT');

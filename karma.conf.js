@@ -1,6 +1,6 @@
 const webpackConf = require('./webpack.config.js');
 webpackConf.mode = 'development';
-webpackConf.devtool = 'cheap-eval-source-map';
+webpackConf.devtool = 'eval-source-map';
 
 module.exports = function(config) {
   config.set({
