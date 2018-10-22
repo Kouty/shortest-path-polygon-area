@@ -4,7 +4,14 @@ export function pointLineDistance([x, y], [[x1, y1], [x2, y2]]) {
   return numerator / denominator;
 }
 
-export function pointSide([x, y], [[x1, y1], [x2, y2]]) {
+export function pointSide([x, y], [[x1, y1], [x2, y2]], precision = 0) {
+  if (precision) {
+    const dist = pointLineDistance([x, y], [[x1, y1], [x2, y2]]);
+    if (dist <= precision) {
+      return pointSide.ABOVE;
+    }
+  }
+
   const d = (x - x1) * (y2 - y1) - (y - y1) * (x2 - x1);
   return d < 0 ? pointSide.LEFT : (d === 0) ? pointSide.ABOVE : pointSide.RIGHT;
 }

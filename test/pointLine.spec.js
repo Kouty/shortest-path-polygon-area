@@ -31,5 +31,9 @@ describe('Point-line math', () => {
     it('should return ABOVE for the point (5,5) and the line [(0,0), (3,3)]', () => {
       expect(pointSide([5, 5], [[0, 0], [3, 3]])).toBe(pointSide.ABOVE);
     });
+
+    it('should return ABOVE for the point (4,2.1) and the line [(0,0), (10,5)] with precision 0.1', () => {
+      expect(pointSide([4, 2.1], [[0, 0], [10, 5]], 0.1)).toBe(pointSide.ABOVE);
+    });
   });
 });
