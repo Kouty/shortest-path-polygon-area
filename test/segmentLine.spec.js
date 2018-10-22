@@ -48,4 +48,8 @@ describe('Segment-line', () => {
   it('should consider the segment [[2,2],[5,5]] to be ABOVE_1_2 line [[0,0], [10,10]]', () => {
     expect(segmentLineSide([[2, 2], [5, 5]], [[0, 0], [10, 10]])).toBe(segmentLineSide.ABOVE_1_2);
   });
+
+  it('should consider the segment [[2,2.1],[5,4.9]] to be ABOVE_1_2 line [[0,0], [10,10]] with a precision of 0.1', () => {
+    expect(segmentLineSide([[2, 2.1], [5, 4.9]], [[0, 0], [10, 10]], 0.1)).toBe(segmentLineSide.ABOVE_1_2);
+  });
 });
