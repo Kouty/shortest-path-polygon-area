@@ -1,21 +1,5 @@
 import { segmentLineSide } from './segmentLine';
-
-function boundingBox([[x0, y0], [x1, y1]]) {
-  const bbX0 = Math.min(x0, x1);
-  const bbX1 = Math.max(x0, x1);
-  const bbY0 = Math.min(y0, y1);
-  const bbY1 = Math.max(y0, y1);
-
-  // left, top - right, bottom
-  return [[bbX0, bbY0], [bbX1, bbY1]];
-}
-
-function boxIntersect([[r1L, r1T],[r1R,r1B]], [[r2L, r2T],[r2R,r2B]]) {
-  return !(r2L > r1R
-    || r2R < r1L
-    || r2T > r1B
-    || r2B < r1T);
-}
+import { boundingBox, boxIntersect } from './boundingBox';
 
 export function segSegIntersect(segment1, segment2) {
   const side1 = segmentLineSide(segment1, segment2);
