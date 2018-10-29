@@ -50,10 +50,8 @@ describe('Segment bounding box', () => {
   });
 
   describe('boxIntersect with precision', () => {
-    xit('should consider [[0,0],[3,3]] to NOT intersect [[3,0],[5,3]]', () => {
-      console.log('aaa');
+    it('should consider [[0,0],[3,3]] to NOT intersect [[3,0],[5,3]]', () => {
       expect(boxIntersect([[0, 0], [3, 3]], [[3, 0], [5, 5]]), 0.1).toBe(false);
-      console.log('aaa -----');
     });
   });
 });
