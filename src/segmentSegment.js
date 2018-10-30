@@ -22,16 +22,17 @@ export function segSegIntersect(segment1, segment2, precision = 0) {
   }
 
   if (side1 === segmentLineSide.ABOVE_1_2 || side2 === segmentLineSide.ABOVE_1_2) {
-    const intersection = boxIntersect(segment1, segment2);
+    let intersection = boxIntersect(segment1, segment2);
+    if(intersection) {
+      const minDist = Math.min(
+        dist(segment1[0], segment2[0]),
+        dist(segment1[0], segment2[1]),
+        dist(segment1[1], segment2[0]),
+        dist(segment1[1], segment2[1])
+      );
 
-    // const minDist = Math.min(
-    //   dist(segment1[0], segment2[0]),
-    //   dist(segment1[0], segment2[1]),
-    //   dist(segment1[1], segment2[0]),
-    //   dist(segment1[1], segment2[1])
-    // );
-    //
-    // console.log(minDist);
+      intersection = minDist > precision;
+    }
 
     return intersection ? segSegIntersect.INTERSECTION : segSegIntersect.NO_INTERSECTION;
   }

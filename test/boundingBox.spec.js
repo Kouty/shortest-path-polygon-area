@@ -49,21 +49,4 @@ describe('Segment bounding box', () => {
     });
   });
 
-  xdescribe('boxIntersect with precision 0.1', () => {
-    it('should consider [[0,0],[3,3]] to NOT intersect [[2.99,0],[5,3]]', () => {
-      expect(boxIntersect([[0, 0], [3, 3]], [[2.99, 0], [5, 5]], 0.1)).toBe(false);
-    });
-
-    it('should consider [[0,0],[3,3]] to NOT intersect [[-3,0],[0.05,0]]', () => {
-      expect(boxIntersect([[0, 0], [3, 3]], [[-3, 0], [0.05, 1]], 0.1)).toBe(false);
-    });
-
-    it('should consider [[0,0],[3,3]] to NOT intersect [[1,2.99],[2,4]]', () => {
-      expect(boxIntersect([[0, 0], [3, 3]], [[1, 2.99], [2, 4]], 0.1)).toBe(false);
-    });
-
-    it('should consider [[0,0],[3,3]] to NOT intersect [[-1,-2],[1,0.04]]', () => {
-      expect(boxIntersect([[0, 0], [3, 3]], [[-1, -2], [1, 0.04]], 0.1)).toBe(false);
-    });
-  });
 });
