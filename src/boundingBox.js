@@ -20,7 +20,7 @@ export function boxIntersect(segment1, segment2, precision = 0) {
     const in0y0 = Math.min(bb0y0, bb1y0);
     const in0y1 = Math.max(bb0y1, bb1y1);
 
-    if (in0x1 - in0x0 <= precision) {
+    if (in0x1 - in0x0 <= precision || in0y0 - in0y1 <= precision) {
       return false;
     }
   }

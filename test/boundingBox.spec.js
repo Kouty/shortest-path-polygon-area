@@ -24,12 +24,12 @@ describe('Segment bounding box', () => {
       expect(boxIntersect([[3, 0], [0, 2]], [[0, 2], [3, 0]])).toBe(true);
     });
 
-    it('should consider [[0,0],[3,0]] to intersect [[2,0],[4,0]]', () => {
-      expect(boxIntersect([[0, 0], [3, 0]], [[2, 0], [4, 0]])).toBe(true);
+    it('should consider [[0,0],[3,1]] to intersect [[2,0],[4,1]]', () => {
+      expect(boxIntersect([[0, 0], [3, 1]], [[2, 0], [4, 1]])).toBe(true);
     });
 
-    it('should consider [[0,0],[5,0]] to intersect [[2,0],[4,0]]', () => {
-      expect(boxIntersect([[0, 0], [5, 0]], [[2, 0], [4, 0]])).toBe(true);
+    it('should consider [[0,0],[5,1]] to intersect [[2,0],[4,1]]', () => {
+      expect(boxIntersect([[0, 0], [5, 1]], [[2, 0], [4, 1]])).toBe(true);
     });
 
     it('should consider [[0,0],[3,3]] to NOT intersect [[4,0],[5,3]]', () => {
@@ -49,9 +49,21 @@ describe('Segment bounding box', () => {
     });
   });
 
-  describe('boxIntersect with precision', () => {
-    it('should consider [[0,0],[3,3]] to NOT intersect [[3,0],[5,3]]', () => {
-      expect(boxIntersect([[0, 0], [3, 3]], [[3, 0], [5, 5]]), 0.1).toBe(false);
+  describe('boxIntersect with precision 0.1', () => {
+    it('should consider [[0,0],[3,3]] to NOT intersect [[2.99,0],[5,3]]', () => {
+      expect(boxIntersect([[0, 0], [3, 3]], [[2.99, 0], [5, 5]], 0.1)).toBe(false);
+    });
+
+    it('should consider [[0,0],[3,3]] to NOT intersect [[-3,0],[0.05,0]]', () => {
+      expect(boxIntersect([[0, 0], [3, 3]], [[-3, 0], [0.05, 1]], 0.1)).toBe(false);
+    });
+
+    it('should consider [[0,0],[3,3]] to NOT intersect [[1,2.99],[2,4]]', () => {
+      expect(boxIntersect([[0, 0], [3, 3]], [[1, 2.99], [2, 4]], 0.1)).toBe(false);
+    });
+
+    it('should consider [[0,0],[3,3]] to NOT intersect [[-1,-2],[1,0.04]]', () => {
+      expect(boxIntersect([[0, 0], [3, 3]], [[-1, -2], [1, 0.04]], 0.1)).toBe(false);
     });
   });
 });
