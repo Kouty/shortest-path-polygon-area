@@ -1,7 +1,7 @@
 import { segmentLineSide } from './segmentLine';
-import { boundingBox, boxIntersect } from './boundingBox';
+import { boxIntersect } from './boundingBox';
 
-export function segSegIntersect(segment1, segment2) {
+export function segSegIntersect(segment1, segment2, precision = 0) {
   const side1 = segmentLineSide(segment1, segment2);
   const side2 = segmentLineSide(segment2, segment1);
 
@@ -22,12 +22,24 @@ export function segSegIntersect(segment1, segment2) {
   }
 
   if (side1 === segmentLineSide.ABOVE_1_2 || side2 === segmentLineSide.ABOVE_1_2) {
-    const bb1 = boundingBox(segment1);
-    const bb2 = boundingBox(segment2);
+    const intersection = boxIntersect(segment1, segment2);
 
-    return boxIntersect(bb1, bb2) ? segSegIntersect.INTERSECTION : segSegIntersect.NO_INTERSECTION;
+    // const minDist = Math.min(
+    //   dist(segment1[0], segment2[0]),
+    //   dist(segment1[0], segment2[1]),
+    //   dist(segment1[1], segment2[0]),
+    //   dist(segment1[1], segment2[1])
+    // );
+    //
+    // console.log(minDist);
+
+    return intersection ? segSegIntersect.INTERSECTION : segSegIntersect.NO_INTERSECTION;
   }
 }
 
 segSegIntersect.INTERSECTION = Symbol('segSegIntersect.INTERSECTION');
 segSegIntersect.NO_INTERSECTION = Symbol('segSegIntersect.NO_INTERSECTION');
+
+function dist(p1, p2) {
+  return Math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2);
+}
