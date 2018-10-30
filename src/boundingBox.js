@@ -13,14 +13,17 @@ export function boxIntersect(segment1, segment2, precision = 0) {
   const [[bb0x0, bb0y0], [bb0x1, bb0y1]] = bb0;
   const [[bb1x0, bb1y0], [bb1x1, bb1y1]] = bb1;
 
-  const outside = !(bb1x0 > bb0x1 || bb1y0 < bb0y1 || bb1x1 < bb0x0 || bb1y1 > bb0y0);
-  if (!outside) {
+  const inside = !(bb1x0 > bb0x1 || bb1y0 < bb0y1 || bb1x1 < bb0x0 || bb1y1 > bb0y0);
+  if (inside) {
+    const in0x0 = Math.max(bb0x0, bb1x0);
+    const in0x1 = Math.min(bb0x1, bb1x1);
+    const in0y0 = Math.min(bb0y0, bb1y0);
+    const in0y1 = Math.max(bb0y1, bb1y1);
 
+    if (in0x1 - in0x0 <= precision) {
+      return false;
+    }
   }
 
-  return outside;
-}
-
-function dist(p1, p2) {
-  return Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
+  return inside;
 }
