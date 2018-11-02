@@ -34,11 +34,12 @@ export function segSegIntersect(segment1, segment2, precision = 0) {
       intersection = minDist > precision;
     }
 
-    return intersection ? segSegIntersect.INTERSECTION : segSegIntersect.NO_INTERSECTION;
+    return intersection ? segSegIntersect.INLINE_INTERSECTION : segSegIntersect.NO_INTERSECTION;
   }
 }
 
 segSegIntersect.INTERSECTION = Symbol('segSegIntersect.INTERSECTION');
+segSegIntersect.INLINE_INTERSECTION = Symbol('segSegIntersect.INLINE_INTERSECTION');
 segSegIntersect.NO_INTERSECTION = Symbol('segSegIntersect.NO_INTERSECTION');
 
 function dist(p1, p2) {

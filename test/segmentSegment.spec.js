@@ -10,6 +10,10 @@ describe('Segment-segment', () => {
     it('should define segSegIntersect.NO_INTERSECTION', () => {
       expect(segSegIntersect.NO_INTERSECTION).not.toBeUndefined();
     });
+
+    it('should define segSegIntersect.INLINE_INTERSECTION', () => {
+      expect(segSegIntersect.INLINE_INTERSECTION).not.toBeUndefined();
+    });
   });
 
   describe('not inline segments', () => {
@@ -27,9 +31,9 @@ describe('Segment-segment', () => {
   });
 
   describe('inline segments', () => {
-    it('should considers segments [[0,5],[5,5]], [[4,5],[7,5]] as intersecting', () => {
+    it('should considers segments [[0,5],[5,5]], [[4,5],[7,5]] as intersecting inline', () => {
       expect(segSegIntersect([[0, 5], [5, 5]], [[4, 5], [7, 5]])).toBe(
-        segSegIntersect.INTERSECTION
+        segSegIntersect.INLINE_INTERSECTION
       );
     });
 
