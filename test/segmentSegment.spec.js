@@ -50,5 +50,11 @@ describe('Segment-segment', () => {
         segSegIntersect.NO_INTERSECTION
       );
     });
+
+    it('should considers segments [[0,0],[0,5]], [[-0.01, 2],[7,7]] as NOT intersecting with precision 0.1', () => {
+      expect(segSegIntersect([[0, 0], [0, 5]], [[-0.01, 2], [7, 7]], 0.1)).toBe(
+        segSegIntersect.NO_INTERSECTION
+      );
+    });
   });
 });

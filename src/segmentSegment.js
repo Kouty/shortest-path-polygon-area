@@ -2,8 +2,8 @@ import { segmentLineSide } from './segmentLine';
 import { boxIntersect } from './boundingBox';
 
 export function segSegIntersect(segment1, segment2, precision = 0) {
-  const side1 = segmentLineSide(segment1, segment2);
-  const side2 = segmentLineSide(segment2, segment1);
+  const side1 = segmentLineSide(segment1, segment2, precision);
+  const side2 = segmentLineSide(segment2, segment1, precision);
 
   if (
     side1 === segmentLineSide.INTERSECTION &&
@@ -17,6 +17,15 @@ export function segSegIntersect(segment1, segment2, precision = 0) {
     side1 === segmentLineSide.RIGHT ||
     side2 === segmentLineSide.LEFT ||
     side2 === segmentLineSide.RIGHT
+  ) {
+    return segSegIntersect.NO_INTERSECTION;
+  }
+
+  if(
+    side1 === segmentLineSide.ABOVE_1 ||
+    side1 === segmentLineSide.ABOVE_2 ||
+    side2 === segmentLineSide.ABOVE_1 ||
+    side2 === segmentLineSide.ABOVE_2
   ) {
     return segSegIntersect.NO_INTERSECTION;
   }
