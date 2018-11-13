@@ -2,8 +2,25 @@ import { pointLineDistance, pointLineSide } from '../src/pointLine';
 
 describe('Point-line math', () => {
   describe('pointLineDistance', () => {
+    const Inf = Number.POSITIVE_INFINITY;
     it('(1,1) should be distance 1 from x axis', () => {
       expect(pointLineDistance([1, 1], [[0, 0], [10, 0]])).toBeCloseTo(1);
+    });
+
+    it('(10,20) should be distance 7 from [[0,+Inf],[3,4]]', () => {
+      expect(pointLineDistance([10, 20], [[0, +Inf], [3, 4]])).toBeCloseTo(7);
+    });
+
+    it('(10,20) should be distance 8 from [[2,73],[3,+Inf]]', () => {
+      expect(pointLineDistance([10, 20], [[2, 73], [3, +Inf]])).toBeCloseTo(8);
+    });
+
+    it('(10,20) should be distance 16 from [[+Inf,5],[56,4]]', () => {
+      expect(pointLineDistance([10, 20], [[+Inf, 5], [56, 4]])).toBeCloseTo(16);
+    });
+
+    it('(10,20) should be distance 13 from [[2,7],[+Inf,99]]', () => {
+      expect(pointLineDistance([10, 20], [[2, 7], [+Inf, 99]])).toBeCloseTo(13);
     });
   });
 
