@@ -1,8 +1,9 @@
 import { pointLineDistance, pointLineSide } from '../src/pointLine';
 
 describe('Point-line math', () => {
+  const Inf = Number.POSITIVE_INFINITY;
+
   describe('pointLineDistance', () => {
-    const Inf = Number.POSITIVE_INFINITY;
     it('(1,1) should be distance 1 from x axis', () => {
       expect(pointLineDistance([1, 1], [[0, 0], [10, 0]])).toBeCloseTo(1);
     });
@@ -53,6 +54,22 @@ describe('Point-line math', () => {
       expect(pointLineSide([4, 2.1], [[0, 0], [10, 5]], 0.1)).toBe(
         pointLineSide.ABOVE
       );
+    });
+
+    it('should return LEFT for point (13, 2) and X axis', () => {
+      expect(pointLineSide([13, 2], [[0, 0], [+Inf, 0]])).toBe(pointLineSide.LEFT);
+    });
+
+    it('should return RIGHT for point (13, -2) and X axis', () => {
+      expect(pointLineSide([13, -2], [[0, 0], [+Inf, 0]])).toBe(pointLineSide.RIGHT);
+    });
+
+    it('should return LEFT for point (-2, 13) and Y axis', () => {
+      expect(pointLineSide([-2, 13], [[0, 0], [0, +Inf]])).toBe(pointLineSide.LEFT);
+    });
+
+    it('should return RIGHT for point (2, 13) and Y axis', () => {
+      expect(pointLineSide([2, 13], [[0, 0], [0, +Inf]])).toBe(pointLineSide.RIGHT);
     });
   });
 });
