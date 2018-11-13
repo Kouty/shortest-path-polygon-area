@@ -1,10 +1,24 @@
-import { polySegmentIntersect } from '../src/polygon';
+import { polySegmentIntersect, polyPointInside } from '../src/polygon';
 
 describe('Polygon', () => {
   let squareClockWise;
 
   beforeEach(() => {
     squareClockWise = [[0, 0], [0, 10], [10, 10], [10, 0]];
+  });
+
+  describe('point inside', () => {
+    it('should consider point [5,5] inside squareClockWise polygon', () => {
+      expect(polyPointInside(squareClockWise, [5, 5])).toBe(true);
+    });
+
+    it('should consider point [5,11] outside squareClockWise polygon', () => {
+      expect(polyPointInside(squareClockWise, [5, 11])).toBe(false);
+    });
+
+    it('should count only once boundaries', () => {
+      expect(polyPointInside([[0, 0], [-1, -1], [1, 1]], [5, 11])).toBe(false);
+    });
   });
 
   describe('segment intersection:', () => {
