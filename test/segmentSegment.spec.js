@@ -1,6 +1,6 @@
 import { segSegIntersect } from '../src/segmentSegment';
 
-describe('Segment-segment', () => {
+xdescribe('Segment-segment', () => {
 
   describe('results', () => {
     it('should define segSegIntersect.INTERSECTION', () => {
@@ -13,6 +13,10 @@ describe('Segment-segment', () => {
 
     it('should define segSegIntersect.INLINE_INTERSECTION', () => {
       expect(segSegIntersect.INLINE_INTERSECTION).not.toBeUndefined();
+    });
+
+    it('should define segSegIntersect.RIGHT', () => {
+      expect(segSegIntersect.RIGHT).not.toBeUndefined();
     });
   });
 
@@ -55,6 +59,14 @@ describe('Segment-segment', () => {
       expect(segSegIntersect([[0, 0], [0, 5]], [[-0.01, 2], [7, 7]], 0.1)).toBe(
         segSegIntersect.NO_INTERSECTION
       );
+    });
+  });
+
+  xdescribe('one point intersection', () => {
+    it('should considers segment [[0,3],[7,3]] on the right of [[0,1],[0,6]]', () => {
+      console.log('----');
+      expect(segSegIntersect([[0, 1], [0, 6]], [[0, 3], [7, 3]])).toBe(segSegIntersect.RIGHT);
+      console.log('----');
     });
   });
 });

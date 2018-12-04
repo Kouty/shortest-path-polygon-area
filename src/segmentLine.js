@@ -15,6 +15,11 @@ export function segmentLineSide([s1, s2], line, precision) {
   }
 
   if (side1 === pointLineSide.ABOVE || side2 === pointLineSide.ABOVE) {
+
+    if (side1 === pointLineSide.ABOVE) {
+      return side2 === pointLineSide.RIGHT ? segmentLineSide.ABOVE_1_RIGHT : segmentLineSide.ABOVE_1;
+    }
+
     return side1 === pointLineSide.ABOVE
       ? segmentLineSide.ABOVE_1
       : segmentLineSide.ABOVE_2;
@@ -26,6 +31,7 @@ export function segmentLineSide([s1, s2], line, precision) {
 segmentLineSide.LEFT = Symbol('segmentLineSide.LEFT');
 segmentLineSide.RIGHT = Symbol('segmentLineSide.RIGHT');
 segmentLineSide.INTERSECTION = Symbol('segmentLineSide.INTERSECTION');
+segmentLineSide.ABOVE_1_RIGHT = Symbol('segmentLineSide.ABOVE_1_RIGHT');
 segmentLineSide.ABOVE_1 = Symbol('segmentLineSide.ABOVE_1');
 segmentLineSide.ABOVE_2 = Symbol('segmentLineSide.ABOVE_2');
 segmentLineSide.ABOVE_1_2 = Symbol('segmentLineSide.ABOVE_1_2');

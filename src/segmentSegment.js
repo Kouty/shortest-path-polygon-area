@@ -50,6 +50,7 @@ export function segSegIntersect(segment1, segment2, precision = 0) {
 segSegIntersect.INTERSECTION = Symbol('segSegIntersect.INTERSECTION');
 segSegIntersect.INLINE_INTERSECTION = Symbol('segSegIntersect.INLINE_INTERSECTION');
 segSegIntersect.NO_INTERSECTION = Symbol('segSegIntersect.NO_INTERSECTION');
+segSegIntersect.RIGHT = Symbol('segSegIntersect.RIGHT');
 
 function dist(p1, p2) {
   return Math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2);

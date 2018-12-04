@@ -32,12 +32,12 @@ describe('Segment-line', () => {
   });
 
   it('should define ABOVE_1 enum item', () => {
-    expect(segmentLineSide.ABOVE_1).not.toBeUndefined();
+    expect(segmentLineSide.ABOVE_1_RIGHT).not.toBeUndefined();
   });
 
-  it('should consider the segment [[2,2],[3,5]] to be ABOVE_1 line [[0,0], [10,10]]', () => {
-    expect(segmentLineSide([[2, 2], [3, 5]], [[0, 0], [10, 10]])).toBe(
-      segmentLineSide.ABOVE_1
+  it('should consider the segment [[2,2],[3,1]] to be ABOVE_1 line [[0,0], [10,10]]', () => {
+    expect(segmentLineSide([[2, 2], [3, 1]], [[0, 0], [10, 10]])).toBe(
+      segmentLineSide.ABOVE_1_RIGHT
     );
   });
 
