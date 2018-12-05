@@ -1,9 +1,21 @@
 export function pointLineDistance([x, y], [[x1, y1], [x2, y2]]) {
   if (!Number.isFinite(x)) {
+    if (!Number.isFinite(x2)) {
+      return Math.abs(y - y2);
+    } else if (!Number.isFinite(x1)) {
+      return Math.abs(y - y1);
+    }
+
     return Number.POSITIVE_INFINITY;
   }
 
   if (!Number.isFinite(y)) {
+    if (!Number.isFinite(y2)) {
+      return Math.abs(x - x2);
+    } else if (!Number.isFinite(y1)) {
+      return Math.abs(x - x1);
+    }
+
     return Number.POSITIVE_INFINITY;
   }
 
@@ -31,15 +43,19 @@ export function pointLineDistance([x, y], [[x1, y1], [x2, y2]]) {
 export function pointLineSide([x, y], [[x1, y1], [x2, y2]], precision = 0) {
   if (precision) {
     const dist = pointLineDistance([x, y], [[x1, y1], [x2, y2]]);
-    if(isNaN(dist)) {
-      console.log([x, y], [[x1, y1], [x2, y2]])
-    }
     if (dist <= precision) {
       return pointLineSide.ABOVE;
     }
   }
 
-  const d = (x - x1) * (y2 - y1) - (y - y1) * (x2 - x1);
+  let d;
+  // if (!Number.isFinite(y)) {
+  //   const m = (y2 - y1) / (x2 - x1);
+  //   d =
+  // } else {
+  d = (x - x1) * (y2 - y1) - (y - y1) * (x2 - x1);
+  // }
+
   return d < 0
     ? pointLineSide.LEFT
     : d === 0
