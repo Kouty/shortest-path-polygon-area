@@ -18,6 +18,10 @@ describe('Segment-segment', () => {
     it('should define segSegIntersect.ABOVE_RIGHT', () => {
       expect(segSegIntersect.ABOVE_RIGHT).not.toBeUndefined();
     });
+
+    it('should define segSegIntersect.ABOVE_LEFT', () => {
+      expect(segSegIntersect.ABOVE_LEFT).not.toBeUndefined();
+    });
   });
 
   describe('not inline segments', () => {
@@ -62,11 +66,37 @@ describe('Segment-segment', () => {
     });
   });
 
-  xdescribe('one point intersection', () => {
+  describe('one point intersection', () => {
     it('should considers segment [[0,3],[7,3]] on the right of [[0,1],[0,6]]', () => {
-      console.log('----');
       expect(segSegIntersect([[0, 1], [0, 6]], [[0, 3], [7, 3]])).toBe(segSegIntersect.ABOVE_RIGHT);
-      console.log('----');
+    });
+
+    it('should considers segment [[0,3],[7,3]] on the right of [[0,1],[0,6]]', () => {
+      expect(segSegIntersect([[0, 1], [0, 6]], [[7, 3], [0, 3]])).toBe(segSegIntersect.ABOVE_RIGHT);
+    });
+
+    it('should considers segment [[0,3],[-7,3]] on the left of [[0,1],[0,6]]', () => {
+      expect(segSegIntersect([[0, 1], [0, 6]], [[0, 3], [-7, 3]])).toBe(segSegIntersect.ABOVE_LEFT);
+    });
+
+    it('should considers segment [[-7,3], [0,3]] on the left of [[0,1],[0,6]]', () => {
+      expect(segSegIntersect([[0, 1], [0, 6]], [[-7, 3], [0, 3]])).toBe(segSegIntersect.ABOVE_LEFT);
+    });
+
+    it('should considers segment [[3,-2],[3,2]] on the right of [[0,0],[3,0]]', () => {
+      expect(segSegIntersect([[0, 0], [3, 0]], [[3, -2], [3, 2]])).toBe(segSegIntersect.ABOVE_RIGHT);
+    });
+
+    it('should considers segment [[3,2], [3,-2]] on the right of [[0,0],[3,0]]', () => {
+      expect(segSegIntersect([[0, 0], [3, 0]], [[3, 2], [3, -2]])).toBe(segSegIntersect.ABOVE_RIGHT);
+    });
+
+    it('should considers segment [[0,-2],[0,2]] on the left of [[0,0],[3,0]]', () => {
+      expect(segSegIntersect([[0, 0], [3, 0]], [[0, -2], [0, 2]])).toBe(segSegIntersect.ABOVE_LEFT);
+    });
+
+    it('should considers segment [[0,2], [0,-2]] on the left of [[0,0],[3,0]]', () => {
+      expect(segSegIntersect([[0, 0], [3, 0]], [[0,2], [0,-2]])).toBe(segSegIntersect.ABOVE_LEFT);
     });
   });
 });
