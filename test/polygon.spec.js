@@ -34,7 +34,7 @@ describe('Polygon', () => {
       expect(polySegmentIntersect(squareClockWise, [[11, -5], [12, 5]])).toBe(false);
     });
 
-    xit('segment [[-5, 5],[0.01,6]] does NOT intersect the squareClockWise polygon with precision 0.1', () => {
+    it('segment [[-5, 5],[0.01,6]] does NOT intersect the squareClockWise polygon with precision 0.1', () => {
       expect(polySegmentIntersect(squareClockWise, [[-5, 5], [0.01, 6]], 0.1)).toBe(false);
     });
   });
