@@ -23,6 +23,18 @@ describe('Point-line math', () => {
     it('(10,20) should be distance 13 from [[2,7],[+Inf,99]]', () => {
       expect(pointLineDistance([10, 20], [[2, 7], [+Inf, 99]])).toBeCloseTo(13);
     });
+
+    it('(10,Inf) should be distance Inf from [[2,7],[99,99]]', () => {
+      expect(pointLineDistance([10, Inf], [[2, 7], [99, 99]])).toBe(Inf);
+    });
+
+    it('[Inf, 0] should be distance Inf from  [[0, 0], [0, 10]]', () => {
+      expect(pointLineDistance([Inf, 0], [[0, 0], [10, 0]])).toBe(Inf);
+    });
+
+    it('[0, Inf] should be distance Inf from  [[0, 0], [0, 10]]', () => {
+      expect(pointLineDistance([0, Inf], [[0, 0], [0, 10]])).toBe(Inf);
+    });
   });
 
   describe('pointLineSide', () => {

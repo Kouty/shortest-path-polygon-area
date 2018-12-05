@@ -17,6 +17,13 @@ export function polyPointInside(poly, point, precision) {
 }
 
 export function polySegmentIntersect(poly, seg, precision) {
+  const aInside = polyPointInside(poly, seg[0], precision);
+  const bInside = polyPointInside(poly, seg[1], precision);
+
+  if (aInside !== bInside) {
+    return true;
+  }
+
   let prev = poly[0];
   for (let i = 1; i <= poly.length; i++) {
     const iSegment = [prev, poly[i >= poly.length ? 0 : i]];

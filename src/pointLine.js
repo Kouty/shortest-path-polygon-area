@@ -1,4 +1,12 @@
 export function pointLineDistance([x, y], [[x1, y1], [x2, y2]]) {
+  if (!Number.isFinite(x)) {
+    return Number.POSITIVE_INFINITY;
+  }
+
+  if (!Number.isFinite(y)) {
+    return Number.POSITIVE_INFINITY;
+  }
+
   if (!Number.isFinite(y1)) {
     return Math.abs(x2 - x);
   }
@@ -23,6 +31,9 @@ export function pointLineDistance([x, y], [[x1, y1], [x2, y2]]) {
 export function pointLineSide([x, y], [[x1, y1], [x2, y2]], precision = 0) {
   if (precision) {
     const dist = pointLineDistance([x, y], [[x1, y1], [x2, y2]]);
+    if(isNaN(dist)) {
+      console.log([x, y], [[x1, y1], [x2, y2]])
+    }
     if (dist <= precision) {
       return pointLineSide.ABOVE;
     }
