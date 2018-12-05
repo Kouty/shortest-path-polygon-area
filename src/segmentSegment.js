@@ -22,11 +22,17 @@ export function segSegIntersect(segment1, segment2, precision = 0) {
   }
 
   if(
-    side1 === segmentLineSide.ABOVE_1 ||
-    side1 === segmentLineSide.ABOVE_2 ||
-    side2 === segmentLineSide.ABOVE_1 ||
-    side2 === segmentLineSide.ABOVE_2
+    side1 === segmentLineSide.ABOVE_1_RIGHT ||
+    side1 === segmentLineSide.ABOVE_1_LEFT ||
+    side1 === segmentLineSide.ABOVE_2_RIGHT ||
+    side1 === segmentLineSide.ABOVE_2_LEFT ||
+    side2 === segmentLineSide.ABOVE_1_RIGHT ||
+    side2 === segmentLineSide.ABOVE_1_LEFT ||
+    side2 === segmentLineSide.ABOVE_2_RIGHT ||
+    side2 === segmentLineSide.ABOVE_2_LEFT
   ) {
+
+
     return segSegIntersect.NO_INTERSECTION;
   }
 
@@ -50,7 +56,7 @@ export function segSegIntersect(segment1, segment2, precision = 0) {
 segSegIntersect.INTERSECTION = Symbol('segSegIntersect.INTERSECTION');
 segSegIntersect.INLINE_INTERSECTION = Symbol('segSegIntersect.INLINE_INTERSECTION');
 segSegIntersect.NO_INTERSECTION = Symbol('segSegIntersect.NO_INTERSECTION');
-segSegIntersect.RIGHT = Symbol('segSegIntersect.RIGHT');
+segSegIntersect.ABOVE_RIGHT = Symbol('segSegIntersect.ABOVE_RIGHT');
 
 function dist(p1, p2) {
   return Math.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2);
