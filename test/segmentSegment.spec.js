@@ -59,9 +59,15 @@ describe('Segment-segment', () => {
       );
     });
 
-    xit('should considers segments [[0,0],[0,5]], [[-0.01, 2],[7,7]] as NOT intersecting with precision 0.1', () => {
+    it('should considers segments [[0,0],[0,5]], [[-0.01, 2],[7,7]] as NOT intersecting with precision 0.1', () => {
       expect(segSegIntersect([[0, 0], [0, 5]], [[-0.01, 2], [7, 7]], 0.1)).toBe(
-        segSegIntersect.NO_INTERSECTION
+        segSegIntersect.ABOVE_RIGHT
+      );
+    });
+
+    it('should considers segments [[0,0],[0,5]], [[-0.01, 2],[7,7]] as intersecting with precision 0.001', () => {
+      expect(segSegIntersect([[0, 0], [0, 5]], [[-0.01, 2], [7, 7]], 0.001)).toBe(
+        segSegIntersect.INTERSECTION
       );
     });
   });
