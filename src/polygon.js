@@ -7,7 +7,7 @@ export function polyPointInside(poly, point, precision) {
   for (let i = 1; i <= poly.length; i++) {
     const iSegment = [prev, poly[i >= poly.length ? 0 : i]];
     const result = segSegIntersect(iSegment, seg, precision);
-    if (result === segSegIntersect.INTERSECTION) {
+    if (result === segSegIntersect.INTERSECTION || result === segSegIntersect.ABOVE_LEFT) {
       counter++;
     }
     prev = poly[i];

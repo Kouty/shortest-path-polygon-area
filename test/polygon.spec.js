@@ -16,10 +16,8 @@ describe('Polygon', () => {
       expect(polyPointInside(squareClockWise, [5, 11])).toBe(false);
     });
 
-    xit('should count only once boundaries', () => {
-      console.log('-----------');
+    it('should count only once boundaries', () => {
       expect(polyPointInside([[0, -5], [5, 0], [0, 5], [-5, 0]], [0, 0], 0.1)).toBe(true);
-      console.log('-----------');
     });
   });
 
