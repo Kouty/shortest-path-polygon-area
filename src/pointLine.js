@@ -48,17 +48,17 @@ export function pointLineSide([x, y], [[x1, y1], [x2, y2]], precision = 0) {
     }
   }
 
-  let d;
-  // if (!Number.isFinite(y)) {
-  //   const m = (y2 - y1) / (x2 - x1);
-  //   d =
-  // } else {
-  d = (x - x1) * (y2 - y1) - (y - y1) * (x2 - x1);
-  // }
+  const a = (x - x1);
+  const b = (y2 - y1);
+  const c = (a === 0 || b === 0) ? 0 : a * b;
+  const d = (y - y1);
+  const e = (x2 - x1);
+  const f = (d === 0 || e === 0) ? 0 : d * e;
 
-  return d < 0
+  const res = c - f;
+  return res < 0
     ? pointLineSide.LEFT
-    : d === 0
+    : res === 0
       ? pointLineSide.ABOVE
       : pointLineSide.RIGHT;
 }

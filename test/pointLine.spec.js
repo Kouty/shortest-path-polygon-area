@@ -102,8 +102,20 @@ describe('Point-line math', () => {
       expect(pointLineSide([2, Inf], [[0, 0], [0, +Inf]])).toBe(pointLineSide.RIGHT);
     });
 
-    xit('should return LEFT for point (-2, Inf) and Y axis', () => {
+    it('should return LEFT for point (-2, Inf) and Y axis', () => {
       expect(pointLineSide([-2, Inf], [[0, 0], [0, +Inf]])).toBe(pointLineSide.LEFT);
+    });
+
+    it('should return RIGHT for point (2, Inf) and Y axis', () => {
+      expect(pointLineSide([2, Inf], [[0, 0], [0, +Inf]])).toBe(pointLineSide.RIGHT);
+    });
+
+    it('should return LEFT for point (Inf, 2) and X axis', () => {
+      expect(pointLineSide([Inf, 2], [[0, 0], [Inf, 0]])).toBe(pointLineSide.LEFT);
+    });
+
+    it('should return RIGHT for point (Inf,-2) and X axis', () => {
+      expect(pointLineSide([Inf,-2], [[0, 0], [Inf, 0]])).toBe(pointLineSide.RIGHT);
     });
   });
 });
