@@ -32,8 +32,20 @@ describe('Polygon', () => {
       expect(polyPointInside(squareClockWise, [0, 5])).toBe(false);
     });
 
-    it('should count only once boundaries', () => {
-      expect(polyPointInside([[0, -5], [5, 0], [0, 5], [-5, 0]], [0, 0], 0.1)).toBe(true);
+    it('should consider point [10, 10] outside squareClockWise polygon', () => {
+      expect(polyPointInside(squareClockWise, [10, 10])).toBe(false);
+    });
+
+    it('should count only once boundaries 1', () => {
+      expect(polyPointInside([[0, -5], [5, 0], [0, 5], [-5, 0]], [0, 0])).toBe(true);
+    });
+
+    it('should count only once boundaries 2', () => {
+      expect(polyPointInside([[0, -5], [5, 0], [0, 5], [-5, 0]], [0, -6])).toBe(false);
+    });
+
+    it('should consider point [9.95, 9.95] outside squareClockWise polygon, with precision 0.1', () => {
+      expect(polyPointInside(squareClockWise, [9.95, 9.95], 0.1)).toBe(false);
     });
   });
 
@@ -50,8 +62,14 @@ describe('Polygon', () => {
       expect(polySegmentIntersect(squareClockWise, [[11, -5], [12, 5]])).toBe(false);
     });
 
-    it('segment [[-5, 5],[0.01,6]] does NOT intersect the squareClockWise polygon with precision 0.1', () => {
-      expect(polySegmentIntersect(squareClockWise, [[-5, 5], [0.01, 6]], 0.1)).toBe(false);
+    it('segment [[-10, -10],[12, 12]] intersects the squareClockWise polygon', () => {
+      expect(polySegmentIntersect(squareClockWise, [[-10, -10], [12, 12]])).toBe(false);
+    });
+
+    describe('preicision', () => {
+      it('segment [[-5, 5],[0.01,6]] does NOT intersect the squareClockWise polygon with precision 0.1', () => {
+        expect(polySegmentIntersect(squareClockWise, [[-5, 5], [0.01, 6]], 0.1)).toBe(false);
+      });
     });
   });
 

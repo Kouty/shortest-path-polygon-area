@@ -9,7 +9,7 @@ export function polyPointInside(poly, point, precision) {
     const iSegment = [prev, poly[i >= poly.length ? 0 : i]];
     const result = segSegIntersect(iSegment, seg, precision);
     if (result === segSegIntersect.ABOVE_LEFT || result === segSegIntersect.ABOVE_RIGHT) {
-      const side = pointLineSide(point, iSegment);
+      const side = pointLineSide(point, iSegment, precision);
       if (side === pointLineSide.ABOVE) {
         return false;
       }
