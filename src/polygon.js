@@ -34,7 +34,8 @@ export function polySegmentIntersect(poly, seg, precision) {
   const aInside = polyPointInside(poly, seg[0], precision);
   const bInside = polyPointInside(poly, seg[1], precision);
 
-  if (aInside !== bInside) {
+  if (aInside === polyPointInside.OUTSIDE && bInside === polyPointInside.INSIDE ||
+    aInside === polyPointInside.INSIDE && bInside === polyPointInside.OUTSIDE) {
     return true;
   }
 
