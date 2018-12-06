@@ -9,43 +9,43 @@ describe('Polygon', () => {
 
   describe('point inside', () => {
     it('should consider point [5,5] inside squareClockWise polygon', () => {
-      expect(polyPointInside(squareClockWise, [5, 5])).toBe(true);
+      expect(polyPointInside(squareClockWise, [5, 5])).toBe(polyPointInside.INSIDE);
     });
 
     it('should consider point [5,11] outside squareClockWise polygon', () => {
-      expect(polyPointInside(squareClockWise, [5, 11])).toBe(false);
+      expect(polyPointInside(squareClockWise, [5, 11])).toBe(polyPointInside.OUTSIDE);
     });
 
-    it('should consider point [5, 0] outside squareClockWise polygon', () => {
-      expect(polyPointInside(squareClockWise, [5, 0])).toBe(false);
+    it('should consider point [5, 0] above squareClockWise polygon', () => {
+      expect(polyPointInside(squareClockWise, [5, 0])).toBe(polyPointInside.ABOVE);
     });
 
     it('should consider point [10, 5] outside squareClockWise polygon', () => {
-      expect(polyPointInside(squareClockWise, [10, 5])).toBe(false);
+      expect(polyPointInside(squareClockWise, [10, 5])).toBe(polyPointInside.ABOVE);
     });
 
     it('should consider point [5, 10] outside squareClockWise polygon', () => {
-      expect(polyPointInside(squareClockWise, [5, 10])).toBe(false);
+      expect(polyPointInside(squareClockWise, [5, 10])).toBe(polyPointInside.ABOVE);
     });
 
     it('should consider point [0, 5] outside squareClockWise polygon', () => {
-      expect(polyPointInside(squareClockWise, [0, 5])).toBe(false);
+      expect(polyPointInside(squareClockWise, [0, 5])).toBe(polyPointInside.ABOVE);
     });
 
     it('should consider point [10, 10] outside squareClockWise polygon', () => {
-      expect(polyPointInside(squareClockWise, [10, 10])).toBe(false);
+      expect(polyPointInside(squareClockWise, [10, 10])).toBe(polyPointInside.ABOVE);
     });
 
     it('should count only once boundaries 1', () => {
-      expect(polyPointInside([[0, -5], [5, 0], [0, 5], [-5, 0]], [0, 0])).toBe(true);
+      expect(polyPointInside([[0, -5], [5, 0], [0, 5], [-5, 0]], [0, 0])).toBe(polyPointInside.INSIDE);
     });
 
     it('should count only once boundaries 2', () => {
-      expect(polyPointInside([[0, -5], [5, 0], [0, 5], [-5, 0]], [0, -6])).toBe(false);
+      expect(polyPointInside([[0, -5], [5, 0], [0, 5], [-5, 0]], [0, -6])).toBe(polyPointInside.OUTSIDE);
     });
 
     it('should consider point [9.95, 9.95] outside squareClockWise polygon, with precision 0.1', () => {
-      expect(polyPointInside(squareClockWise, [9.95, 9.95], 0.1)).toBe(false);
+      expect(polyPointInside(squareClockWise, [9.95, 9.95], 0.1)).toBe(polyPointInside.ABOVE);
     });
   });
 
@@ -66,7 +66,7 @@ describe('Polygon', () => {
       expect(polySegmentIntersect(squareClockWise, [[-10, -10], [12, 12]])).toBe(false);
     });
 
-    describe('preicision', () => {
+    describe('precision', () => {
       it('segment [[-5, 5],[0.01,6]] does NOT intersect the squareClockWise polygon with precision 0.1', () => {
         expect(polySegmentIntersect(squareClockWise, [[-5, 5], [0.01, 6]], 0.1)).toBe(false);
       });

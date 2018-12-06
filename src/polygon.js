@@ -11,10 +11,10 @@ export function polyPointInside(poly, point, precision) {
     if (result === segSegIntersect.ABOVE_LEFT || result === segSegIntersect.ABOVE_RIGHT) {
       const side = pointLineSide(point, iSegment, precision);
       if (side === pointLineSide.ABOVE) {
-        return false;
+        return polyPointInside.ABOVE;
       }
     } else if (result === segSegIntersect.INLINE_INTERSECTION) {
-      return false;
+      return polyPointInside.ABOVE;
     }
 
     if (result === segSegIntersect.INTERSECTION || result === segSegIntersect.ABOVE_LEFT) {
@@ -23,8 +23,12 @@ export function polyPointInside(poly, point, precision) {
     prev = poly[i];
   }
 
-  return counter % 2 !== 0;
+  return (counter % 2 !== 0) ? polyPointInside.INSIDE : polyPointInside.OUTSIDE;
 }
+
+polyPointInside.OUTSIDE = Symbol('OUTSIDE');
+polyPointInside.INSIDE = Symbol('INSIDE');
+polyPointInside.ABOVE = Symbol('ABOVE');
 
 export function polySegmentIntersect(poly, seg, precision) {
   const aInside = polyPointInside(poly, seg[0], precision);
