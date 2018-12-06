@@ -20,6 +20,12 @@ describe('Tree', () => {
 
       expect(child.parent).toBe(node);
     });
+
+    it('should provide a value', () => {
+      const value = {};
+
+      expect(new TreeNode(value).value).toBe(value);
+    });
   });
 
   describe('Tree', () => {

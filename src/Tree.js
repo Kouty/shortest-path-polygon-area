@@ -11,7 +11,7 @@ export class Tree {
       next() {
         const nextEl = queue[i++];
         const done = nextEl === undefined;
-        if(!done) {
+        if (!done) {
           queue.push(...nextEl.children);
         }
         return {
@@ -27,8 +27,9 @@ export class Tree {
 }
 
 export class TreeNode {
-  constructor() {
+  constructor(value) {
     this.children = [];
+    this.value = value;
   }
 
   addChild(child) {
