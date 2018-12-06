@@ -1,4 +1,5 @@
 import { segSegIntersect } from './segmentSegment';
+import { pointLineSide } from './pointLine';
 
 export function polyPointInside(poly, point, precision) {
   let prev = poly[0];
@@ -7,6 +8,15 @@ export function polyPointInside(poly, point, precision) {
   for (let i = 1; i <= poly.length; i++) {
     const iSegment = [prev, poly[i >= poly.length ? 0 : i]];
     const result = segSegIntersect(iSegment, seg, precision);
+    if (result === segSegIntersect.ABOVE_LEFT || result === segSegIntersect.ABOVE_RIGHT) {
+      const side = pointLineSide(point, iSegment);
+      if (side === pointLineSide.ABOVE) {
+        return false;
+      }
+    } else if (result === segSegIntersect.INLINE_INTERSECTION) {
+      return false;
+    }
+
     if (result === segSegIntersect.INTERSECTION || result === segSegIntersect.ABOVE_LEFT) {
       counter++;
     }
