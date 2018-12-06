@@ -20,7 +20,7 @@ describe('Area', () => {
     expect(testArea.insideBounds([[-1, -1], [9, 9]])).toBe(false);
   });
 
-  xit('should consider [[0,0],[10,10]] inside bounds', () => {
+  it('should consider [[0,0],[10,10]] inside bounds', () => {
     expect(testArea.insideBounds([[0,0], [10, 10]])).toBe(true);
   });
 
