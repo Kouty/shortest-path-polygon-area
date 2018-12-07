@@ -48,5 +48,4 @@ describe('Segment bounding box', () => {
       expect(boxIntersect([[0, 0], [0, 3]], [[0, 4], [0, 5]])).toBe(false);
     });
   });
-
 });

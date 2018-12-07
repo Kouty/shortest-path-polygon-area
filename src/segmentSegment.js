@@ -6,10 +6,7 @@ export function segSegIntersect(segment1, segment2, precision = 0) {
   const side1 = segmentLineSide(segment1, segment2, precision);
   const side2 = segmentLineSide(segment2, segment1, precision);
 
-  if (
-    side1 === segmentLineSide.INTERSECTION &&
-    side2 === segmentLineSide.INTERSECTION
-  ) {
+  if (side1 === segmentLineSide.INTERSECTION && side2 === segmentLineSide.INTERSECTION) {
     return segSegIntersect.INTERSECTION;
   }
 
@@ -21,7 +18,6 @@ export function segSegIntersect(segment1, segment2, precision = 0) {
   ) {
     return segSegIntersect.NO_INTERSECTION;
   }
-
 
   if (side2 === segmentLineSide.ABOVE_1_RIGHT || side2 === segmentLineSide.ABOVE_2_RIGHT) {
     return segSegIntersect.ABOVE_RIGHT;

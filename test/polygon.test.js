@@ -37,11 +37,15 @@ describe('Polygon', () => {
     });
 
     it('should count only once boundaries 1', () => {
-      expect(polyPointInside([[0, -5], [5, 0], [0, 5], [-5, 0]], [0, 0])).toBe(polyPointInside.INSIDE);
+      expect(polyPointInside([[0, -5], [5, 0], [0, 5], [-5, 0]], [0, 0])).toBe(
+        polyPointInside.INSIDE
+      );
     });
 
     it('should count only once boundaries 2', () => {
-      expect(polyPointInside([[0, -5], [5, 0], [0, 5], [-5, 0]], [0, -6])).toBe(polyPointInside.OUTSIDE);
+      expect(polyPointInside([[0, -5], [5, 0], [0, 5], [-5, 0]], [0, -6])).toBe(
+        polyPointInside.OUTSIDE
+      );
     });
 
     it('should consider point [9.95, 9.95] outside squareClockWise polygon, with precision 0.1', () => {
@@ -78,5 +82,4 @@ describe('Polygon', () => {
       expect(polySegmentIntersect(squareClockWise, [[5, 5], [12, 12]])).toBe(true);
     });
   });
-
 });

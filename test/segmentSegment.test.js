@@ -1,7 +1,6 @@
 import { segSegIntersect } from '../src/segmentSegment';
 
 describe('Segment-segment', () => {
-
   describe('results', () => {
     it('should define segSegIntersect.INTERSECTION', () => {
       expect(segSegIntersect.INTERSECTION).not.toBeUndefined();
@@ -90,11 +89,15 @@ describe('Segment-segment', () => {
     });
 
     it('should considers segment [[3,-2],[3,2]] on the right of [[0,0],[3,0]]', () => {
-      expect(segSegIntersect([[0, 0], [3, 0]], [[3, -2], [3, 2]])).toBe(segSegIntersect.ABOVE_RIGHT);
+      expect(segSegIntersect([[0, 0], [3, 0]], [[3, -2], [3, 2]])).toBe(
+        segSegIntersect.ABOVE_RIGHT
+      );
     });
 
     it('should considers segment [[3,2], [3,-2]] on the right of [[0,0],[3,0]]', () => {
-      expect(segSegIntersect([[0, 0], [3, 0]], [[3, 2], [3, -2]])).toBe(segSegIntersect.ABOVE_RIGHT);
+      expect(segSegIntersect([[0, 0], [3, 0]], [[3, 2], [3, -2]])).toBe(
+        segSegIntersect.ABOVE_RIGHT
+      );
     });
 
     it('should considers segment [[0,-2],[0,2]] on the left of [[0,0],[3,0]]', () => {
@@ -102,7 +105,7 @@ describe('Segment-segment', () => {
     });
 
     it('should considers segment [[0,2], [0,-2]] on the left of [[0,0],[3,0]]', () => {
-      expect(segSegIntersect([[0, 0], [3, 0]], [[0,2], [0,-2]])).toBe(segSegIntersect.ABOVE_LEFT);
+      expect(segSegIntersect([[0, 0], [3, 0]], [[0, 2], [0, -2]])).toBe(segSegIntersect.ABOVE_LEFT);
     });
   });
 });

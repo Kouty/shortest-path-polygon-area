@@ -1,7 +1,6 @@
 import { Tree, TreeNode } from '../src/Tree';
 
 describe('Tree', () => {
-
   describe('TreeNode', () => {
     it('should provide addChild method', () => {
       const node = new TreeNode();

@@ -115,7 +115,7 @@ describe('Point-line math', () => {
     });
 
     it('should return RIGHT for point (Inf,-2) and X axis', () => {
-      expect(pointLineSide([Inf,-2], [[0, 0], [Inf, 0]])).toBe(pointLineSide.RIGHT);
+      expect(pointLineSide([Inf, -2], [[0, 0], [Inf, 0]])).toBe(pointLineSide.RIGHT);
     });
   });
 });

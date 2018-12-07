@@ -1,7 +1,6 @@
 import { polyPointInside, polySegmentIntersect } from './polygon';
 
 export class Area {
-
   constructor({ bounds = [], holes = [] }) {
     this.bounds = bounds;
     this.holes = holes;
@@ -19,7 +18,7 @@ export class Area {
 
   hitsHole(segment, precision) {
     let hit = null;
-    this.holes.some((hole) => {
+    this.holes.some(hole => {
       const result = polySegmentIntersect(hole, segment, precision);
       if (result) {
         hit = hole;

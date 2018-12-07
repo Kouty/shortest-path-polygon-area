@@ -48,19 +48,15 @@ export function pointLineSide([x, y], [[x1, y1], [x2, y2]], precision = 0) {
     }
   }
 
-  const a = (x - x1);
-  const b = (y2 - y1);
-  const c = (a === 0 || b === 0) ? 0 : a * b;
-  const d = (y - y1);
-  const e = (x2 - x1);
-  const f = (d === 0 || e === 0) ? 0 : d * e;
+  const a = x - x1;
+  const b = y2 - y1;
+  const c = a === 0 || b === 0 ? 0 : a * b;
+  const d = y - y1;
+  const e = x2 - x1;
+  const f = d === 0 || e === 0 ? 0 : d * e;
 
   const res = c - f;
-  return res < 0
-    ? pointLineSide.LEFT
-    : res === 0
-      ? pointLineSide.ABOVE
-      : pointLineSide.RIGHT;
+  return res < 0 ? pointLineSide.LEFT : res === 0 ? pointLineSide.ABOVE : pointLineSide.RIGHT;
 }
 
 pointLineSide.LEFT = Symbol('pointLineSide.LEFT');

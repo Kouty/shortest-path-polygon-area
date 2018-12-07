@@ -37,5 +37,4 @@ export class TreeNode {
     this.children.push(child);
     return this;
   }
-
 }

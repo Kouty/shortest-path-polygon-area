@@ -52,7 +52,6 @@ export class ShortestPath {
           break;
         }
       }
-
     } while (moreNodesToEvaluate);
 
     return result;

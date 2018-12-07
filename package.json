@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --mode development --compress",
     "build": "webpack --mode production",
     "test": "karma start",
-    "prettify": "prettier --write ./src/**/*.js ./test/**/*.js",
+    "prettier": "prettier --write ./src/**/*.js ./test/**/*.js",
     "eslint": "eslint ./src/**/*.js ./test/**/*.js "
   },
   "repository": {
@@ -39,7 +39,7 @@
     "karma-chrome-launcher": "^2.2.0",
     "karma-jasmine": "^1.1.2",
     "karma-webpack": "^3.0.5",
-    "prettier": "1.14.3",
+    "prettier": "^1.14.3",
     "webpack": "^4.21.0",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.9"
