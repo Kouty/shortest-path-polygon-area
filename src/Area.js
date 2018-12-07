@@ -2,7 +2,7 @@ import { polyPointInside, polySegmentIntersect } from './polygon';
 
 export class Area {
 
-  constructor({ bounds, holes }) {
+  constructor({ bounds = [], holes = [] }) {
     this.bounds = bounds;
     this.holes = holes;
   }
@@ -29,5 +29,13 @@ export class Area {
     });
 
     return hit;
+  }
+
+  insideArea(segment, precision) {
+    if (this.hitsHole(segment, precision)) {
+      return false;
+    }
+
+    return this.insideBounds(segment, precision);
   }
 }

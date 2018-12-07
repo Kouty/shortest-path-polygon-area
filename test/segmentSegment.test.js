@@ -77,7 +77,7 @@ describe('Segment-segment', () => {
       expect(segSegIntersect([[0, 1], [0, 6]], [[0, 3], [7, 3]])).toBe(segSegIntersect.ABOVE_RIGHT);
     });
 
-    it('should considers segment [[0,3],[7,3]] on the right of [[0,1],[0,6]]', () => {
+    it('should considers segment [[7, 3], [0, 3]] on the right of [[0,1],[0,6]]', () => {
       expect(segSegIntersect([[0, 1], [0, 6]], [[7, 3], [0, 3]])).toBe(segSegIntersect.ABOVE_RIGHT);
     });
 

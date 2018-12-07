@@ -53,4 +53,53 @@ describe('Area', () => {
       expect(testArea.hitsHole([[2, 2], [4.01, 5]], 0.1)).toBe(null);
     });
   });
+
+  describe('No holes or bounds', () => {
+    it('bounds param should be optional', () => {
+      expect(() => new Area({}).insideBounds([[1, 1], [2, 2]])).not.toThrow();
+    });
+
+    it('holes param should be optional', () => {
+      expect(() => new Area({}).hitsHole([[1, 1], [2, 2]])).not.toThrow();
+    });
+  });
+
+  describe('insideArea', () => {
+    beforeEach(() => {
+      testArea = new Area({});
+      spyOn(testArea, 'hitsHole');
+      spyOn(testArea, 'insideBounds');
+    });
+
+    it('should use hitsHole()', () => {
+      const segment = [[2, 2], [3, 3]];
+      const precision = 0.1;
+
+      testArea.insideArea(segment, precision);
+
+      expect(testArea.hitsHole).toHaveBeenCalledWith(segment, precision);
+    });
+
+    it('should return false if hitHoles returns something', () => {
+      testArea.hitsHole.and.returnValue({});
+
+      expect(testArea.insideArea()).toBe(false);
+    });
+
+    it('should use insideBounds if no hole is hit', () => {
+      testArea.hitsHole.and.returnValue(null);
+      const segment = [[2, 2], [3, 3]];
+      const precision = 0.1;
+
+      testArea.insideArea(segment, precision);
+
+      expect(testArea.insideBounds).toHaveBeenCalledWith(segment, precision);
+    });
+
+    it('should return false if insideBounds returns false', () => {
+      testArea.insideBounds.and.returnValue(false);
+
+      expect(testArea.insideArea()).toBe(false);
+    });
+  });
 });
