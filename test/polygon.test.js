@@ -1,4 +1,4 @@
-import { polySegmentIntersect, polyPointInside } from '../src/polygon';
+import { polySegmentIntersect, polyPointInside, polySegmentInside } from '../src/polygon';
 
 describe('Polygon', () => {
   let squareClockWise;
@@ -80,6 +80,32 @@ describe('Polygon', () => {
   describe('one point inside, one outside', () => {
     it('segment [[5,5],[12, 12]] intersects the squareClockWise polygon', () => {
       expect(polySegmentIntersect(squareClockWise, [[5, 5], [12, 12]])).toBe(true);
+    });
+  });
+
+  describe('segment inside', () => {
+    it('should consider [[1,1],[9,9]] inside bounds', () => {
+      expect(polySegmentInside(squareClockWise, [[1, 1], [9, 9]])).toBe(true);
+    });
+
+    it('should consider [[-1,-1],[-9,9]] outside bounds', () => {
+      expect(polySegmentInside(squareClockWise, [[-1, -1], [-9, 9]])).toBe(false);
+    });
+
+    it('should consider [[-1,-1],[9,9]] outside bounds', () => {
+      expect(polySegmentInside(squareClockWise, [[-1, -1], [9, 9]])).toBe(false);
+    });
+
+    it('should consider [[0,0],[10,10]] inside bounds', () => {
+      expect(polySegmentInside(squareClockWise, [[0, 0], [10, 10]])).toBe(true);
+    });
+
+    it('should consider [[-0.01,-0.01],[10.01,10.01]] inside bounds with preicision 0.1', () => {
+      expect(polySegmentInside(squareClockWise, [[-0.01, -0.01], [10.01, 10.01]], 0.1)).toBe(true);
+    });
+
+    it('should consider [[-0.01,5],[10.01,5]] inside bounds with preicision 0.1', () => {
+      expect(polySegmentInside(squareClockWise, [[-0.01, 5], [10.01, 5]], 0.1)).toBe(true);
     });
   });
 });

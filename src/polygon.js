@@ -55,3 +55,13 @@ export function polySegmentIntersect(poly, seg, precision) {
 
   return false;
 }
+
+export function polySegmentInside(poly, segment, precision) {
+  const intersects = polySegmentIntersect(poly, segment, precision);
+  if (intersects) {
+    return false;
+  }
+
+  const pointInside = polyPointInside(poly, segment[0], precision);
+  return pointInside === polyPointInside.ABOVE || pointInside === polyPointInside.INSIDE;
+}
