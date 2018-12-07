@@ -102,4 +102,24 @@ describe('Area', () => {
       expect(testArea.insideArea()).toBe(false);
     });
   });
+
+  describe('allVertices', () => {
+    let bounds;
+    let holes;
+    beforeEach(() => {
+      bounds = [[0, 0], [1, 1], [2, 2]];
+      holes = [[[3, 3], [4, 4], [5, 5]], [[6, 6], [7, 7], [8, 8]]];
+      testArea = new Area({ bounds, holes });
+    });
+
+    it('should return all the vertices in the area', () => {
+      const all = [];
+      all.push(...bounds);
+      holes.forEach(hole => all.push(...hole));
+
+      const allFromArea = testArea.allVertices();
+
+      expect(allFromArea.length).toBe(all.length);
+    });
+  });
 });

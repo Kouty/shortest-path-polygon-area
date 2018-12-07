@@ -38,4 +38,14 @@ export class Area {
 
     return this.insideBounds(segment, precision);
   }
+
+  allVertices() {
+    let allVertices = [];
+    this.holes.forEach(hole => {
+      allVertices = allVertices.concat(hole);
+    });
+    allVertices = allVertices.concat(this.bounds);
+
+    return allVertices;
+  }
 }
