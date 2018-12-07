@@ -1,6 +1,6 @@
 import { ShortestPath } from '../src/ShortestPath';
 
-xdescribe('ShortestPath', () => {
+describe('ShortestPath', () => {
   let bounds;
 
   beforeEach(() => {
@@ -22,15 +22,8 @@ xdescribe('ShortestPath', () => {
     const to = [9, 9];
 
     const path = new ShortestPath({ bounds, holes }).calculate({ from, to });
+    console.log(path);
     expect(path).toEqual([from, [5, 4], to]);
   });
 
-  it('should compute all vertices', () => {
-    const holes = [[[1, 1], [2, 2]], [[3, 3], [4, 4]]];
-    const bounds = [[5, 5]];
-
-    const all = new ShortestPath({ bounds, holes }).allVertices();
-
-    expect(all).toEqual([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]]);
-  });
 });
