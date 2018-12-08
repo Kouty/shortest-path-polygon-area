@@ -84,28 +84,34 @@ describe('Polygon', () => {
   });
 
   describe('segment inside', () => {
+    const INSIDE = polySegmentInside.INSIDE;
+    const OUTSIDE = polySegmentInside.OUTSIDE;
+    const CROSS = polySegmentInside.CROSS;
+
     it('should consider [[1,1],[9,9]] inside bounds', () => {
-      expect(polySegmentInside(squareClockWise, [[1, 1], [9, 9]])).toBe(true);
+      expect(polySegmentInside(squareClockWise, [[1, 1], [9, 9]])).toBe(INSIDE);
     });
 
     it('should consider [[-1,-1],[-9,9]] outside bounds', () => {
-      expect(polySegmentInside(squareClockWise, [[-1, -1], [-9, 9]])).toBe(false);
+      expect(polySegmentInside(squareClockWise, [[-1, -1], [-9, 9]])).toBe(OUTSIDE);
     });
 
-    it('should consider [[-1,-1],[9,9]] outside bounds', () => {
-      expect(polySegmentInside(squareClockWise, [[-1, -1], [9, 9]])).toBe(false);
+    it('should consider [[-1,-1],[9,9]] to cross bounds', () => {
+      expect(polySegmentInside(squareClockWise, [[-1, -1], [9, 9]])).toBe(CROSS);
     });
 
     it('should consider [[0,0],[10,10]] inside bounds', () => {
-      expect(polySegmentInside(squareClockWise, [[0, 0], [10, 10]])).toBe(true);
+      expect(polySegmentInside(squareClockWise, [[0, 0], [10, 10]])).toBe(INSIDE);
     });
 
     it('should consider [[-0.01,-0.01],[10.01,10.01]] inside bounds with preicision 0.1', () => {
-      expect(polySegmentInside(squareClockWise, [[-0.01, -0.01], [10.01, 10.01]], 0.1)).toBe(true);
+      expect(polySegmentInside(squareClockWise, [[-0.01, -0.01], [10.01, 10.01]], 0.1)).toBe(
+        INSIDE
+      );
     });
 
     it('should consider [[-0.01,5],[10.01,5]] inside bounds with preicision 0.1', () => {
-      expect(polySegmentInside(squareClockWise, [[-0.01, 5], [10.01, 5]], 0.1)).toBe(true);
+      expect(polySegmentInside(squareClockWise, [[-0.01, 5], [10.01, 5]], 0.1)).toBe(INSIDE);
     });
   });
 });

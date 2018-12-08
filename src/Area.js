@@ -10,12 +10,10 @@ export class Area {
     return polySegmentInside(this.bounds, segment, precision);
   }
 
-  insideHole(segment, precision) {
+  crossHole(segment, precision) {
     let hole = null;
     this.holes.some(hole => {
       const inside = polySegmentInside(hole, segment, precision);
-
-
       return inside;
     });
 

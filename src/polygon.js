@@ -59,9 +59,14 @@ export function polySegmentIntersect(poly, seg, precision) {
 export function polySegmentInside(poly, segment, precision) {
   const intersects = polySegmentIntersect(poly, segment, precision);
   if (intersects) {
-    return false;
+    return polySegmentInside.CROSS;
   }
 
   const pointInside = polyPointInside(poly, segment[0], precision);
-  return pointInside === polyPointInside.ABOVE || pointInside === polyPointInside.INSIDE;
+  const inside = pointInside === polyPointInside.ABOVE || pointInside === polyPointInside.INSIDE;
+  return inside ? polySegmentInside.INSIDE : polySegmentInside.OUTSIDE;
 }
+
+polySegmentInside.INSIDE = Symbol('INSIDE');
+polySegmentInside.OUTSIDE = Symbol('OUTSIDE');
+polySegmentInside.CROSS = Symbol('CROSS');
