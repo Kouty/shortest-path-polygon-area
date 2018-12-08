@@ -10,18 +10,22 @@ export class Area {
     return polySegmentInside(this.bounds, segment, precision);
   }
 
-  crossHole(segment, precision) {
-    let hole = null;
+  crossesHole(segment, precision) {
+    let hitHole = null;
     this.holes.some(hole => {
-      const inside = polySegmentInside(hole, segment, precision);
-      return inside;
+      const result = polySegmentInside(hole, segment, precision);
+      if (result === polySegmentInside.CROSS) {
+        hitHole = hole;
+        return true;
+      }
+      return false;
     });
 
-    return hole;
+    return hitHole;
   }
 
   insideArea(segment, precision) {
-    if (this.hitsHole(segment, precision)) {
+    if (this.crossesHole(segment, precision)) {
       return false;
     }
 

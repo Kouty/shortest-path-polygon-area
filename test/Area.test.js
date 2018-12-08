@@ -1,5 +1,6 @@
 import * as polySegmentModule from '../src/polygon';
 import { Area } from '../src/Area';
+import { polySegmentInside } from '../src/polygon';
 
 describe('Area', () => {
   let testArea;
@@ -34,15 +35,14 @@ describe('Area', () => {
       testArea = new Area({ holes });
     });
 
-    xit('should use polySegmentInside to test if a segment is inside holes', () => {
+    it('should use polySegmentInside to test if a segment is inside holes', () => {
       const segment = {};
       const precision = 0.1;
-      const retValue = {};
-      spyOn(polySegmentModule, 'polySegmentInside').and.returnValue(retValue);
+      spyOn(polySegmentModule, 'polySegmentInside').and.returnValue(polySegmentInside.CROSS);
 
-      const result = testArea.crossHole(segment, precision);
+      const result = testArea.crossesHole(segment, precision);
 
-      expect(result).toBe(retValue);
+      expect(result).toBe(testHole);
       expect(polySegmentModule.polySegmentInside).toHaveBeenCalledWith(
         testArea.holes[0],
         segment,
@@ -51,20 +51,20 @@ describe('Area', () => {
     });
   });
 
-  xdescribe('No holes or bounds', () => {
+  describe('No holes or bounds', () => {
     it('bounds param should be optional', () => {
       expect(() => new Area({}).insideBounds([[1, 1], [2, 2]])).not.toThrow();
     });
 
     it('holes param should be optional', () => {
-      expect(() => new Area({}).hitsHole([[1, 1], [2, 2]])).not.toThrow();
+      expect(() => new Area({}).crossesHole([[1, 1], [2, 2]])).not.toThrow();
     });
   });
 
-  xdescribe('insideArea', () => {
+  describe('insideArea', () => {
     beforeEach(() => {
       testArea = new Area({});
-      spyOn(testArea, 'hitsHole');
+      spyOn(testArea, 'crossesHole');
       spyOn(testArea, 'insideBounds');
     });
 
@@ -74,17 +74,17 @@ describe('Area', () => {
 
       testArea.insideArea(segment, precision);
 
-      expect(testArea.hitsHole).toHaveBeenCalledWith(segment, precision);
+      expect(testArea.crossesHole).toHaveBeenCalledWith(segment, precision);
     });
 
-    it('should return false if hitHoles returns something', () => {
-      testArea.hitsHole.and.returnValue({});
+    it('should return false if crossesHole returns something', () => {
+      testArea.crossesHole.and.returnValue({});
 
       expect(testArea.insideArea()).toBe(false);
     });
 
     it('should use insideBounds if no hole is hit', () => {
-      testArea.hitsHole.and.returnValue(null);
+      testArea.crossesHole.and.returnValue(null);
       const segment = [[2, 2], [3, 3]];
       const precision = 0.1;
 
