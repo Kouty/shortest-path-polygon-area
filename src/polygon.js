@@ -7,17 +7,21 @@ export function polyPointInside(poly, point, precision) {
   let counter = 0;
   for (let i = 1; i <= poly.length; i++) {
     const iSegment = [prev, poly[i >= poly.length ? 0 : i]];
-    const result = segSegIntersect(iSegment, seg, precision);
-    if (result === segSegIntersect.ABOVE_LEFT || result === segSegIntersect.ABOVE_RIGHT) {
-      const side = pointLineSide(point, iSegment, precision);
-      if (side === pointLineSide.ABOVE) {
-        return polyPointInside.ABOVE;
-      }
-    } else if (result === segSegIntersect.INLINE_INTERSECTION) {
+    const side = pointLineSide(point, iSegment, precision);
+    if (side === pointLineSide.ABOVE) {
       return polyPointInside.ABOVE;
     }
 
-    if (result === segSegIntersect.INTERSECTION || result === segSegIntersect.ABOVE_LEFT) {
+    const result = segSegIntersect(seg, iSegment, precision);
+    if (result === segSegIntersect.INLINE_INTERSECTION) {
+      return polyPointInside.ABOVE;
+    }
+
+    if (
+      result === segSegIntersect.INTERSECTION ||
+      result === segSegIntersect.ABOVE_1_LEFT ||
+      result === segSegIntersect.ABOVE_2_LEFT
+    ) {
       counter++;
     }
     prev = poly[i];

@@ -1,6 +1,6 @@
 import { polySegmentIntersect, polyPointInside, polySegmentInside } from '../src/polygon';
 
-xdescribe('Polygon', () => {
+describe('Polygon', () => {
   let squareClockWise;
 
   beforeEach(() => {
