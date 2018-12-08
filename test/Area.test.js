@@ -14,12 +14,11 @@ describe('Area', () => {
     it('should use polySegmentInside to test if a segment is inside bounds', () => {
       const segment = {};
       const precision = 0.1;
-      const retValue = {};
-      spyOn(polySegmentModule, 'polySegmentInside').and.returnValue(retValue);
+      spyOn(polySegmentModule, 'polySegmentInside').and.returnValue(polySegmentInside.OUTSIDE);
 
       const result = testArea.insideBounds(segment, precision);
 
-      expect(result).toBe(retValue);
+      expect(result).toBe(false);
       expect(polySegmentModule.polySegmentInside).toHaveBeenCalledWith(
         testArea.bounds,
         segment,

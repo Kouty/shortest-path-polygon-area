@@ -7,7 +7,8 @@ export class Area {
   }
 
   insideBounds(segment, precision) {
-    return polySegmentInside(this.bounds, segment, precision);
+    const result = polySegmentInside(this.bounds, segment, precision);
+    return result === polySegmentInside.INSIDE;
   }
 
   crossesHole(segment, precision) {
