@@ -1,6 +1,6 @@
 import { ShortestPath } from '../src/ShortestPath';
 
-xdescribe('ShortestPath', () => {
+describe('ShortestPath', () => {
   let bounds;
 
   beforeEach(() => {

@@ -15,7 +15,7 @@ export class Area {
     let hitHole = null;
     this.holes.some(hole => {
       const result = polySegmentInside(hole, segment, precision);
-      if (result === polySegmentInside.CROSS) {
+      if (result !== polySegmentInside.OUTSIDE) {
         hitHole = hole;
         return true;
       }
