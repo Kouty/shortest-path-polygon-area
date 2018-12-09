@@ -70,7 +70,7 @@ describe('Polygon', () => {
       expect(polySegmentIntersect(squareClockWise, [[0, 0], [10, 10]])).toBe(false);
     });
 
-    xit('segment [[-10, -10],[12, 12]] intersects the squareClockWise polygon', () => {
+    it('segment [[-10, -10],[12, 12]] intersects the squareClockWise polygon', () => {
       expect(polySegmentIntersect(squareClockWise, [[-10, -10], [12, 12]])).toBe(true);
     });
 
