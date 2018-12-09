@@ -1,5 +1,5 @@
 import { segmentLineSide } from './segmentLine';
-import { boxIntersect } from './boundingBox';
+import { boundingBox, boxIntersect } from './boundingBox';
 import { distance } from './pointPointDistance';
 
 export function segSegIntersect(segment1, segment2, precision = 0) {
@@ -53,7 +53,20 @@ export function segSegIntersect(segment1, segment2, precision = 0) {
         distance(segment1[1], segment2[1])
       );
 
-      intersection = minDist > precision;
+      if (minDist <= precision) {
+        intersection = false;
+        const maxDist = Math.max(
+          distance(segment1[0], segment2[0]),
+          distance(segment1[0], segment2[1]),
+          distance(segment1[1], segment2[0]),
+          distance(segment1[1], segment2[1])
+        );
+        const seg1Len = distance(segment1[0], segment1[1]);
+        const seg2Len = distance(segment2[0], segment2[1]);
+        if (maxDist < seg1Len + seg2Len - precision) {
+          intersection = true;
+        }
+      }
     }
 
     return intersection ? segSegIntersect.INLINE_INTERSECTION : segSegIntersect.NO_INTERSECTION;

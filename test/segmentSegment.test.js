@@ -54,16 +54,26 @@ describe('Segment-segment', () => {
   });
 
   describe('inline segments', () => {
+    const INLINE_INTERSECTION = segSegIntersect.INLINE_INTERSECTION;
+    const NO_INTERSECTION = segSegIntersect.NO_INTERSECTION;
     it('should considers segments [[0,5],[5,5]], [[4,5],[7,5]] as intersecting inline', () => {
-      expect(segSegIntersect([[0, 5], [5, 5]], [[4, 5], [7, 5]])).toBe(
-        segSegIntersect.INLINE_INTERSECTION
-      );
+      expect(segSegIntersect([[0, 5], [5, 5]], [[4, 5], [7, 5]])).toBe(INLINE_INTERSECTION);
     });
 
     it('should considers segments [[0,5],[5,5]], [[6,5],[7,5]] as NOT intersecting', () => {
-      expect(segSegIntersect([[0, 5], [5, 5]], [[6, 5], [7, 5]])).toBe(
-        segSegIntersect.NO_INTERSECTION
-      );
+      expect(segSegIntersect([[0, 5], [5, 5]], [[6, 5], [7, 5]])).toBe(NO_INTERSECTION);
+    });
+
+    it('should considers segments [[0,5],[5,5]], [[0,5],[6,5]] as inline intersecting', () => {
+      expect(segSegIntersect([[0, 5], [5, 5]], [[0, 5], [6, 5]])).toBe(INLINE_INTERSECTION);
+    });
+
+    it('should considers segments [[0,5],[5,5]], [[0,5],[5,5]] as inline intersecting', () => {
+      expect(segSegIntersect([[0, 5], [5, 5]], [[0, 5], [5, 5]])).toBe(INLINE_INTERSECTION);
+    });
+
+    it('should considers segments [[0,5],[5,5]], [[5,5],[7,5]] as inline NOT intersecting', () => {
+      expect(segSegIntersect([[0, 5], [5, 5]], [[5, 5], [7, 5]])).toBe(NO_INTERSECTION);
     });
   });
 
