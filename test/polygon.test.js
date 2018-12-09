@@ -75,7 +75,7 @@ describe('Polygon', () => {
       expect(polySegmentInside(squareClockWise, [[0, 5], [10, 6]])).toBe(INSIDE);
     });
 
-    xit('should consider [[0,0],[0,10]] above bounds', () => {
+    it('should consider [[0,0],[0,10]] above bounds', () => {
       expect(polySegmentInside(squareClockWise, [[0, 0], [0, 10]])).toBe(ABOVE);
     });
 
