@@ -23,6 +23,9 @@ export class ShortestPath {
       const it = tree.bfIterator();
       for (const node of it) {
         verticesToEvaluate.some((vertex, index) => {
+          // if (vertex === to) {
+          //   console.log('cippa');
+          // }
           const segment = [node.value.point, vertex];
           if (this.area.insideArea(segment, precision)) {
             moreNodesToEvaluate = true;

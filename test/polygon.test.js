@@ -53,47 +53,38 @@ describe('Polygon', () => {
     });
   });
 
-  describe('segment intersection', () => {
-    it('segment [[-1,2],[3,5]] intersects the squareClockWise polygon', () => {
-      expect(polySegmentIntersect(squareClockWise, [[-1, 2], [3, 5]])).toBe(true);
-    });
-
-    it('should consider the last segment of a polygon [[0,0], [10,0]]', () => {
-      expect(polySegmentIntersect(squareClockWise, [[3, -2], [3, 2]])).toBe(true);
-    });
-
-    it('segment [[11,-5],[12,5]] does NOT intersect the squareClockWise polygon', () => {
-      expect(polySegmentIntersect(squareClockWise, [[11, -5], [12, 5]])).toBe(false);
-    });
-
-    it('segment [[0, 0],[10, 10]] does NOT intersect the squareClockWise polygon', () => {
-      expect(polySegmentIntersect(squareClockWise, [[0, 0], [10, 10]])).toBe(false);
-    });
-
-    it('segment [[-10, -10],[12, 12]] intersects the squareClockWise polygon', () => {
-      expect(polySegmentIntersect(squareClockWise, [[-10, -10], [12, 12]])).toBe(true);
-    });
-
-    describe('precision', () => {
-      it('segment [[-5, 5],[0.01,6]] does NOT intersect the squareClockWise polygon with precision 0.1', () => {
-        expect(polySegmentIntersect(squareClockWise, [[-5, 5], [0.01, 6]], 0.1)).toBe(false);
-      });
-    });
-  });
-
-  describe('one point inside, one outside', () => {
-    it('segment [[5,5],[12, 12]] intersects the squareClockWise polygon', () => {
-      expect(polySegmentIntersect(squareClockWise, [[5, 5], [12, 12]])).toBe(true);
-    });
-  });
-
   describe('segment inside', () => {
     const INSIDE = polySegmentInside.INSIDE;
     const OUTSIDE = polySegmentInside.OUTSIDE;
     const CROSS = polySegmentInside.CROSS;
+    const ABOVE = polySegmentInside.ABOVE;
+
+    it('segment [[5,5],[12, 12]] crosses the squareClockWise polygon', () => {
+      expect(polySegmentInside(squareClockWise, [[5, 5], [12, 12]])).toBe(CROSS);
+    });
 
     it('should consider [[1,1],[9,9]] inside bounds', () => {
       expect(polySegmentInside(squareClockWise, [[1, 1], [9, 9]])).toBe(INSIDE);
+    });
+
+    it('should consider [[0,0],[10,10]] inside bounds', () => {
+      expect(polySegmentInside(squareClockWise, [[0, 0], [10, 10]])).toBe(INSIDE);
+    });
+
+    it('should consider [[0,5],[10,6]] inside bounds', () => {
+      expect(polySegmentInside(squareClockWise, [[0, 5], [10, 6]])).toBe(INSIDE);
+    });
+
+    it('should consider [[0,0],[0,10]] above bounds', () => {
+      expect(polySegmentInside(squareClockWise, [[0, 0], [0, 10]])).toBe(ABOVE);
+    });
+
+    xit('should consider [[0,-1],[0,11]] above bounds', () => {
+      expect(polySegmentInside(squareClockWise, [[0, -1], [0, 11]])).toBe(ABOVE);
+    });
+
+    it('segment [[-1, -1], [11, 11]] crosses the squareClockWise polygon', () => {
+      expect(polySegmentInside(squareClockWise, [[-1, -1], [11, 11]])).toBe(CROSS);
     });
 
     it('should consider [[-1,-1],[-9,9]] outside bounds', () => {
@@ -104,18 +95,34 @@ describe('Polygon', () => {
       expect(polySegmentInside(squareClockWise, [[-1, -1], [9, 9]])).toBe(CROSS);
     });
 
-    it('should consider [[0,0],[10,10]] inside bounds', () => {
+    it('segment [[-1,2],[3,5]] intersects the squareClockWise polygon', () => {
+      expect(polySegmentInside(squareClockWise, [[-1, 2], [3, 5]])).toBe(CROSS);
+    });
+
+    it('should consider the last segment of a polygon [[0,0], [10,0]]', () => {
+      expect(polySegmentInside(squareClockWise, [[3, -2], [3, 2]])).toBe(CROSS);
+    });
+
+    it('segment [[11,-5],[12,5]] does NOT intersect the squareClockWise polygon', () => {
+      expect(polySegmentInside(squareClockWise, [[11, -5], [12, 5]])).toBe(OUTSIDE);
+    });
+
+    it('segment [[0, 0],[10, 10]] is inside the squareClockWise polygon', () => {
       expect(polySegmentInside(squareClockWise, [[0, 0], [10, 10]])).toBe(INSIDE);
+    });
+
+    it('should consider [[-0.01,5],[10.01,5]] inside bounds with precision 0.1', () => {
+      expect(polySegmentInside(squareClockWise, [[-0.01, 5], [10.01, 5]], 0.1)).toBe(INSIDE);
+    });
+
+    it('segment [[-5, 5],[0.01,6]] does NOT cross the squareClockWise polygon with precision 0.1', () => {
+      expect(polySegmentInside(squareClockWise, [[-5, 5], [0.01, 6]], 0.1)).toBe(OUTSIDE);
     });
 
     it('should consider [[-0.01,-0.01],[10.01,10.01]] inside bounds with preicision 0.1', () => {
       expect(polySegmentInside(squareClockWise, [[-0.01, -0.01], [10.01, 10.01]], 0.1)).toBe(
         INSIDE
       );
-    });
-
-    it('should consider [[-0.01,5],[10.01,5]] inside bounds with preicision 0.1', () => {
-      expect(polySegmentInside(squareClockWise, [[-0.01, 5], [10.01, 5]], 0.1)).toBe(INSIDE);
     });
   });
 });

@@ -1,6 +1,6 @@
 import { ShortestPath } from '../src/ShortestPath';
 
-describe('ShortestPath', () => {
+xdescribe('ShortestPath', () => {
   let bounds;
 
   beforeEach(() => {
@@ -16,7 +16,7 @@ describe('ShortestPath', () => {
     expect(path).toEqual([from, to]);
   });
 
-  xit('one hole', () => {
+  it('one hole', () => {
     const holes = [[[4, 4], [4, 6], [5, 5], [5, 4]]];
     const from = [1, 1];
     const to = [9, 9];

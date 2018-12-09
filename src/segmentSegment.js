@@ -69,6 +69,5 @@ segSegIntersect.ABOVE_1_RIGHT = Symbol('segSegIntersect.ABOVE_1_RIGHT');
 segSegIntersect.ABOVE_2_RIGHT = Symbol('segSegIntersect.ABOVE_2_RIGHT');
 segSegIntersect.ABOVE_1_LEFT = Symbol('segSegIntersect.ABOVE_1_LEFT');
 segSegIntersect.ABOVE_2_LEFT = Symbol('segSegIntersect.ABOVE_2_LEFT');
-
 segSegIntersect.ME_ABOVE_1 = Symbol('segSegIntersect.ME_ABOVE_1');
 segSegIntersect.ME_ABOVE_2 = Symbol('segSegIntersect.ME_ABOVE_2');
