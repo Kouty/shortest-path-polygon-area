@@ -1,6 +1,7 @@
 import { segSegIntersect } from './segmentSegment';
 import { pointLineSide } from './pointLine';
 import { distance } from './pointPointDistance';
+import { boundingBox } from './boundingBox';
 
 export function polyPointInside(poly, point, precision) {
   let prev = poly[0];
@@ -9,6 +10,16 @@ export function polyPointInside(poly, point, precision) {
   for (let i = 1; i <= poly.length; i++) {
     const iSegment = [prev, poly[i >= poly.length ? 0 : i]];
     const side = pointLineSide(point, iSegment, precision);
+    // if (side === pointLineSide.ABOVE) {
+    //   const bbox = boundingBox(iSegment);
+    //   if (
+    //     point[0] >= bbox[0][0] - precision && point[0] <= bbox[1][0] + precision &&
+    //     point[1] >= bbox[0][1] - precision && point[1] <= bbox[1][1] + precision
+    //   ) {
+    //     return polyPointInside.ABOVE;
+    //   }
+    // }
+
     if (side === pointLineSide.ABOVE) {
       return polyPointInside.ABOVE;
     }
@@ -56,10 +67,16 @@ export function polySegmentInside(poly, seg, precision = 0) {
       return polySegmentInside.CROSS;
     }
 
-    if (result === segSegIntersect.ABOVE_1_RIGHT || result === segSegIntersect.ABOVE_1_LEFT) {
-      // distance(iSegment[0], seg[0]) > precision &&
-      // distance(iSegment[0], seg[1]) > precision
+    // if (result === segSegIntersect.INLINE_INTERSECTION) {
+    //   const minDist1 = Math.min(distance(iSegment[0], seg[0]), distance(iSegment[0], seg[1]));
+    //   const minDist2 = Math.min(distance(iSegment[1], seg[0]), distance(iSegment[1], seg[1]));
+    //
+    //   if (minDist1 <= precision && minDist2 <= precision) {
+    //     return polySegmentInside.ABOVE;
+    //   }
+    // }
 
+    if (result === segSegIntersect.ABOVE_1_RIGHT || result === segSegIntersect.ABOVE_1_LEFT) {
       if (prevResult === null) {
         prevResult = segSegIntersect(seg, prevSegment, precision);
       }
@@ -67,7 +84,7 @@ export function polySegmentInside(poly, seg, precision = 0) {
         prevResult === segSegIntersect.ABOVE_2_RIGHT ||
         prevResult === segSegIntersect.ABOVE_2_LEFT
       ) {
-        return aInside === polyPointInside.OUTSIDE
+        return (aInside === polyPointInside.OUTSIDE || bInside === polyPointInside.OUTSIDE)
           ? polySegmentInside.CROSS
           : polySegmentInside.INSIDE;
       }
@@ -77,6 +94,7 @@ export function polySegmentInside(poly, seg, precision = 0) {
     prevSegment = iSegment;
     prevResult = result;
   }
+
 
   const insideOrAbove = aInside === polyPointInside.INSIDE || aInside === polyPointInside.ABOVE;
   return insideOrAbove ? polySegmentInside.INSIDE : polySegmentInside.OUTSIDE;
