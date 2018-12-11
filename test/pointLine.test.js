@@ -33,13 +33,22 @@ describe('Point-line', () => {
     describe('side with Infinity', () => {
       const Inf = Number.POSITIVE_INFINITY;
 
-      it('[3, Inf] is on the right of [[0,0],[0,10]]', () => {
-        expect(pointLineSide([3, Inf], [[0, 0], [0, 10]])).toBe(pointLineSide.RIGHT);
+      it('[Inf, 1] is on the right of [[0, 10], [3, 10]]', () => {
+        expect(pointLineSide([Inf, 1], [[0, 10], [3, 10]])).toBe(pointLineSide.RIGHT);
       });
 
+      it('[Inf, 1] is on the left of [[3, 10], [0, 10]]', () => {
+        expect(pointLineSide([Inf, 1], [[3, 10], [0, 10]])).toBe(pointLineSide.LEFT);
+      });
 
+      it('[1, Inf] is on the right of [[0, 3], [0, 7]]', () => {
+        expect(pointLineSide([1, Inf], [[0, 3], [0, 7]])).toBe(pointLineSide.RIGHT);
+      });
+
+      it('[1, Inf] is on the left of [[0, 7], [0, 3]]', () => {
+        expect(pointLineSide([1, Inf], [[0, 7], [0, 3]])).toBe(pointLineSide.LEFT);
+      });
     });
-
   });
 
   describe('pointLineDistance', () => {

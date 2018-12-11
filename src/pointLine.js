@@ -4,7 +4,9 @@ export function pointLineSide([x, y], [[x1, y1], [x2, y2]], precision = 0) {
     return pointLineSide.ABOVE;
   }
 
-  const res = (x - x1) * (y2 - y1) - (y - y1) * (x2 - x1);
+  const a = (x - x1) === 0 || (y2 - y1) === 0 ? 0 : (x - x1) * (y2 - y1);
+  const b = (y - y1) === 0 || (x2 - x1) === 0 ? 0 : (y - y1) * (x2 - x1);
+  const res = a - b;
   return res < 0 ? pointLineSide.LEFT : res === 0 ? pointLineSide.ABOVE : pointLineSide.RIGHT;
 }
 
