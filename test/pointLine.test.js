@@ -48,6 +48,22 @@ describe('Point-line', () => {
       it('[1, Inf] is on the left of [[0, 7], [0, 3]]', () => {
         expect(pointLineSide([1, Inf], [[0, 7], [0, 3]])).toBe(pointLineSide.LEFT);
       });
+
+      it('[3, 10] is on the left of X axis', () => {
+        expect(pointLineSide([3, 10], [[-Inf, 0], [+Inf, 0]])).toBe(pointLineSide.LEFT);
+      });
+
+      it('[3, -10] is on the right of X axis', () => {
+        expect(pointLineSide([3, -10], [[-Inf, 0], [+Inf, 0]])).toBe(pointLineSide.RIGHT);
+      });
+
+      it('[-10, 3] is on the left of Y axis', () => {
+        expect(pointLineSide([-10, 3], [[0, -Inf], [0, +Inf]])).toBe(pointLineSide.LEFT);
+      });
+
+      it('[10, 3] is on the right of Y axis', () => {
+        expect(pointLineSide([10, 3], [[0, -Inf], [0, +Inf]])).toBe(pointLineSide.RIGHT);
+      });
     });
   });
 
