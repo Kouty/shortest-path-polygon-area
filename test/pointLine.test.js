@@ -1,121 +1,103 @@
 import { pointLineDistance, pointLineSide } from '../src/pointLine';
 
-describe('Point-line math', () => {
-  const Inf = Number.POSITIVE_INFINITY;
-
-  describe('pointLineDistance', () => {
-    it('(1,1) should be distant 1 from x axis', () => {
-      expect(pointLineDistance([1, 1], [[0, 0], [10, 0]])).toBeCloseTo(1);
+describe('Point-line', () => {
+  describe('side', () => {
+    it('should define pointLineSide.RIGHT', () => {
+      expect(pointLineSide.RIGHT).not.toBe(undefined);
     });
 
-    it('(10,20) should be distant 7 from [[0,+Inf],[3,4]]', () => {
-      expect(pointLineDistance([10, 20], [[0, +Inf], [3, 4]])).toBeCloseTo(7);
+    it('[3,2] is on the right of [[0,0],[5,5]]', () => {
+      expect(pointLineSide([3, 2], [[0, 0], [5, 5]])).toBe(pointLineSide.RIGHT);
     });
 
-    it('(10,20) should be distant 8 from [[2,73],[3,+Inf]]', () => {
-      expect(pointLineDistance([10, 20], [[2, 73], [3, +Inf]])).toBeCloseTo(8);
+    it('should define pointLineSide.LEFT', () => {
+      expect(pointLineSide.LEFT).not.toBe(undefined);
     });
 
-    it('(10,20) should be distant 16 from [[+Inf,5],[56,4]]', () => {
-      expect(pointLineDistance([10, 20], [[+Inf, 5], [56, 4]])).toBeCloseTo(16);
+    it('[3,4] is on the left of [[0,0],[5,5]]', () => {
+      expect(pointLineSide([3, 4], [[0, 0], [5, 5]])).toBe(pointLineSide.LEFT);
     });
 
-    it('(10,20) should be distant 13 from [[2,7],[+Inf,99]]', () => {
-      expect(pointLineDistance([10, 20], [[2, 7], [+Inf, 99]])).toBeCloseTo(13);
+    it('should define pointLineSide.ABOVE', () => {
+      expect(pointLineSide.ABOVE).not.toBe(undefined);
     });
 
-    it('(10,Inf) should be distant Inf from [[2,7],[99,99]]', () => {
-      expect(pointLineDistance([10, Inf], [[2, 7], [99, 99]])).toBe(Inf);
+    it('[4,4] is above of [[0,0],[5,5]]', () => {
+      expect(pointLineSide([4, 4], [[0, 0], [5, 5]])).toBe(pointLineSide.ABOVE);
     });
 
-    it('[Inf, 0] should be distant Inf from  [[0, 0], [0, 10]]', () => {
-      expect(pointLineDistance([Inf, 0], [[0, 0], [10, 0]])).toBe(Inf);
+    it('[4.01,3.99] is above of [[0,0],[5,5]] with precision 0.1', () => {
+      expect(pointLineSide([4.01, 3.99], [[0, 0], [5, 5]], 0.1)).toBe(pointLineSide.ABOVE);
     });
 
-    it('[0, Inf] should be distant Inf from  [[0, 0], [0, 10]]', () => {
-      expect(pointLineDistance([0, Inf], [[0, 0], [0, 10]])).toBe(Inf);
+    describe('side with Infinity', () => {
+      const Inf = Number.POSITIVE_INFINITY;
+
+      it('[3, Inf] is on the right of [[0,0],[0,10]]', () => {
+        expect(pointLineSide([3, Inf], [[0, 0], [0, 10]])).toBe(pointLineSide.RIGHT);
+      });
+
+
     });
 
-    it('[0, Inf] should be distant 10 from  [[0, 0], [10, Inf]]', () => {
-      expect(pointLineDistance([0, Inf], [[0, 0], [10, Inf]])).toBe(10);
-    });
-
-    it('[0, Inf] should be distant 10 from  [[10, Inf], [0, 10]]', () => {
-      expect(pointLineDistance([0, Inf], [[10, Inf], [0, 10]])).toBe(10);
-    });
-
-    it('[Inf, 0] should be distant 10 from  [[0, 0], [Inf, 10]]', () => {
-      expect(pointLineDistance([Inf, 0], [[0, 0], [Inf, 10]])).toBe(10);
-    });
-
-    it('[Inf, 0] should be distant 10 from  [[Inf, 0], [0, 10]]', () => {
-      expect(pointLineDistance([Inf, 0], [[Inf, 10], [0, 0]])).toBe(10);
-    });
   });
 
-  describe('pointLineSide', () => {
-    it('should define a LEFT side', () => {
-      expect(pointLineSide.LEFT).toBeDefined();
+  describe('pointLineDistance', () => {
+    it('[1,0] is sqrt(2)/2 distant from line [0,0], [7,7]', () => {
+      expect(pointLineDistance([1, 0], [[0, 0], [7, 7]])).toBeCloseTo(Math.sqrt(2) / 2);
     });
 
-    it('should return LEFT for the point (2,3) and the line [(0,0), (3,3)]', () => {
-      expect(pointLineSide([2, 3], [[0, 0], [3, 3]])).toBe(pointLineSide.LEFT);
+    const Inf = Number.POSITIVE_INFINITY;
+    describe('Infinity on line coordinates', () => {
+      it('[1,-7] is 7 distant from [[0, 0], [Inf, 0]]', () => {
+        expect(pointLineDistance([1, -7], [[0, 0], [Inf, 0]])).toBe(7);
+      });
+
+      it('[1,7] is 7 distant from [[Inf, 0], [0, 0]]', () => {
+        expect(pointLineDistance([1, -7], [[Inf, 0], [0, 0]])).toBe(7);
+      });
+
+      it('[1,7] is 7 distant from X axis', () => {
+        expect(pointLineDistance([1, -7], [[-Inf, 0], [+Inf, 0]])).toBe(7);
+      });
+
+      it('[8,1] is 8 distant from [[0, 0], [0, Inf]]', () => {
+        expect(pointLineDistance([8, 1], [[0, 0], [0, Inf]])).toBe(8);
+      });
+
+      it('[8,1] is 8 distant from [[0, Inf], [0, 0]]', () => {
+        expect(pointLineDistance([8, 1], [[0, Inf], [0, 0]])).toBe(8);
+      });
+
+      it('[8,1] is 8 distant from Y axis', () => {
+        expect(pointLineDistance([8, 1], [[0, Inf], [0, -Inf]])).toBe(8);
+      });
     });
 
-    it('should define a RIGHT side', () => {
-      expect(pointLineSide.RIGHT).toBeDefined();
-    });
+    describe('Infinity on point coordinates', () => {
+      it('[Inf,10] is distant Inf from any non horizontal line', () => {
+        expect(pointLineDistance([Inf, 10], [[0, 0], [3, 4]])).toBe(Inf);
+      });
 
-    it('should return RIGHT for the point (2,1) and the line [(0,0), (3,3)]', () => {
-      expect(pointLineSide([2, 1], [[0, 0], [3, 3]])).toBe(pointLineSide.RIGHT);
-    });
+      it('[Inf,-10] is distant 20 from horizontal [[0,10],[4,10]] line', () => {
+        expect(pointLineDistance([Inf, -10], [[0, 10], [4, 10]])).toBe(20);
+      });
 
-    it('should define ABOVE', () => {
-      expect(pointLineSide.ABOVE).toBeDefined();
-    });
+      it('[Inf,-10] is distant 10 from X axis', () => {
+        expect(pointLineDistance([Inf, -10], [[-Inf, 0], [+Inf, 0]])).toBe(10);
+      });
 
-    it('should return ABOVE for the point (5,5) and the line [(0,0), (3,3)]', () => {
-      expect(pointLineSide([5, 5], [[0, 0], [3, 3]])).toBe(pointLineSide.ABOVE);
-    });
+      it('[10,Inf] is Inf distant from any non vertical line', () => {
+        expect(pointLineDistance([10, Inf], [[0, 0], [3, 4]])).toBe(Inf);
+      });
 
-    it('should return ABOVE for the point (4,2.1) and the line [(0,0), (10,5)] with precision 0.1', () => {
-      expect(pointLineSide([4, 2.1], [[0, 0], [10, 5]], 0.1)).toBe(pointLineSide.ABOVE);
-    });
+      it('[-10,Inf] is distant 20 from vertical line [[10,0],[10,10]] line', () => {
+        expect(pointLineDistance([-10, Inf], [[10, 0], [10, 10]])).toBe(20);
+      });
 
-    it('should return LEFT for point (13, 2) and X axis', () => {
-      expect(pointLineSide([13, 2], [[0, 0], [+Inf, 0]])).toBe(pointLineSide.LEFT);
-    });
-
-    it('should return RIGHT for point (13, -2) and X axis', () => {
-      expect(pointLineSide([13, -2], [[0, 0], [+Inf, 0]])).toBe(pointLineSide.RIGHT);
-    });
-
-    it('should return LEFT for point (-2, 13) and Y axis', () => {
-      expect(pointLineSide([-2, 13], [[0, 0], [0, +Inf]])).toBe(pointLineSide.LEFT);
-    });
-
-    it('should return RIGHT for point (2, 13) and Y axis', () => {
-      expect(pointLineSide([2, 13], [[0, 0], [0, +Inf]])).toBe(pointLineSide.RIGHT);
-    });
-
-    it('should return RIGHT for point (2, Inf) and Y axis', () => {
-      expect(pointLineSide([2, Inf], [[0, 0], [0, +Inf]])).toBe(pointLineSide.RIGHT);
-    });
-
-    it('should return LEFT for point (-2, Inf) and Y axis', () => {
-      expect(pointLineSide([-2, Inf], [[0, 0], [0, +Inf]])).toBe(pointLineSide.LEFT);
-    });
-
-    it('should return RIGHT for point (2, Inf) and Y axis', () => {
-      expect(pointLineSide([2, Inf], [[0, 0], [0, +Inf]])).toBe(pointLineSide.RIGHT);
-    });
-
-    it('should return LEFT for point (Inf, 2) and X axis', () => {
-      expect(pointLineSide([Inf, 2], [[0, 0], [Inf, 0]])).toBe(pointLineSide.LEFT);
-    });
-
-    it('should return RIGHT for point (Inf,-2) and X axis', () => {
-      expect(pointLineSide([Inf, -2], [[0, 0], [Inf, 0]])).toBe(pointLineSide.RIGHT);
+      it('[-10, Inf] is distant 10 from Y axis', () => {
+        expect(pointLineDistance([-10, Inf], [[0, -Inf], [0, +Inf]])).toBe(10);
+      });
     });
   });
 });
