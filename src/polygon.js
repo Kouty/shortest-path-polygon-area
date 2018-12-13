@@ -17,8 +17,9 @@ export function polyPointInside(poly, point) {
 
     const leftRight1 = oneLeftOneRight(side1A, side1B);
     const leftRight2 = oneLeftOneRight(side2A, side2B);
-
-    if (leftRight1 && leftRight2) {
+    const aboveLeft1 = side2A === segmentPointSide.ABOVE && side2B === segmentPointSide.LEFT;
+    const aboveLeft2 = side2A === segmentPointSide.LEFT && side2B === segmentPointSide.ABOVE;
+    if (leftRight1 && leftRight2 || aboveLeft1 || aboveLeft2) {
       intersectionCounter++;
     }
 

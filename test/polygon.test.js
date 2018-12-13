@@ -51,8 +51,18 @@ describe('polyPointInside', () => {
     expect(polyPointInside(square, [11, 5])).toBe(OUTSIDE);
   });
 
-  xit('should count vertexes only once', () => {
+  it('should return OUTSIDE for point [0,-5]', () => {
+    expect(polyPointInside(square, [0, -5])).toBe(OUTSIDE);
+  });
+
+  it('should count vertexes only once', () => {
     const triangle = [[-5, 0], [5, 0], [0, 3]];
+    expect(polyPointInside(triangle, [0, 1])).toBe(INSIDE);
+  });
+
+  it('should count vertexes only once counter clock wise', () => {
+    const triangle = [[-5, 0], [5, 0], [0, 3]];
+    triangle.reverse();
     expect(polyPointInside(triangle, [0, 1])).toBe(INSIDE);
   });
 });
