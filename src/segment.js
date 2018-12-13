@@ -11,7 +11,6 @@ export function segmentPointSide(point, segment, precision = 0) {
   }
 
   const side = pointLineSide(point, segment, precision);
-
   let result;
   if (side === pointLineSide.LEFT) {
     result = segmentPointSide.LEFT;

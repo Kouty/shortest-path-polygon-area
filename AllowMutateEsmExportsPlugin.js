@@ -5,7 +5,7 @@ AllowMutateEsmExportsPlugin.prototype.apply = function(compiler) {
     compilation.mainTemplate.hooks.requireExtensions.tap('AllowMutateEsmExportsPlugin', source => {
       return source.replace(
         'exports, name, { enumerable: true, get: getter }',
-        'exports, name, { enumerable: true, get: function(){return this._val === undefined ? getter(): this._val}, set: function(val){this._val = val}}'
+        'exports, name, { enumerable: true, writable:true, value: getter()}'
       );
     });
   });
