@@ -26,12 +26,33 @@ describe('polyPointInside', () => {
     expect(polyPointInside(square, [0, 5])).toBe(ABOVE);
   });
 
+  it('should return ABOVE for point [10,10]', () => {
+    expect(polyPointInside(square, [10, 10])).toBe(ABOVE);
+  });
+
   it('should return INSIDE for point [5,5]', () => {
     expect(polyPointInside(square, [5, 5])).toBe(INSIDE);
   });
 
-  it('should return INSIDE for point [5,5]', () => {
+  it('should return INSIDE for point [5,5] and counter-clock square', () => {
     const counterClockSquare = square.reverse();
     expect(polyPointInside(counterClockSquare, [5, 5])).toBe(INSIDE);
+  });
+
+  it('should return OUTSIDE for point [5,11]', () => {
+    expect(polyPointInside(square, [5, 11])).toBe(OUTSIDE);
+  });
+
+  it('should return OUTSIDE for point [5,-11]', () => {
+    expect(polyPointInside(square, [5, -11])).toBe(OUTSIDE);
+  });
+
+  it('should return OUTSIDE for point [11,5]', () => {
+    expect(polyPointInside(square, [11, 5])).toBe(OUTSIDE);
+  });
+
+  xit('should count vertexes only once', () => {
+    const triangle = [[-5, 0], [5, 0], [0, 3]];
+    expect(polyPointInside(triangle, [0, 1])).toBe(INSIDE);
   });
 });

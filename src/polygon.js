@@ -3,26 +3,34 @@ import { segmentPointSide } from './segment';
 export function polyPointInside(poly, point) {
   let prevPoint = poly[0];
   let intersectionCounter = 0;
+  const halfLine = [point, [point[0], Number.POSITIVE_INFINITY]];
   for (let i = 1; i <= poly.length + 1; i++) {
     const segment = [prevPoint, poly[i >= poly.length ? 0 : i]];
-    const sideA = segmentPointSide(point, segment);
-    const sideB = segmentPointSide([point[0], Number.POSITIVE_INFINITY], segment);
+    const side1A = segmentPointSide(halfLine[0], segment);
+    const side1B = segmentPointSide(halfLine[1], segment);
+    const side2A = segmentPointSide(segment[0], halfLine);
+    const side2B = segmentPointSide(segment[1], halfLine);
 
-    if (sideA === segmentPointSide.ABOVE) {
+    if (side1A === segmentPointSide.ABOVE) {
       return polyPointInside.ABOVE;
     }
 
-    if (
-      sideA === segmentPointSide.RIGHT && sideB === segmentPointSide.LEFT ||
-      sideA === segmentPointSide.LEFT && sideB === segmentPointSide.RIGHT
-    ) {
+    const leftRight1 = oneLeftOneRight(side1A, side1B);
+    const leftRight2 = oneLeftOneRight(side2A, side2B);
+
+    if (leftRight1 && leftRight2) {
       intersectionCounter++;
     }
 
     prevPoint = segment[1];
   }
 
-  return intersectionCounter % 2 === 0 ? null : polyPointInside.INSIDE;
+  return intersectionCounter % 2 === 0 ? polyPointInside.OUTSIDE : polyPointInside.INSIDE;
+}
+
+function oneLeftOneRight(side1, side2) {
+  return side1 === segmentPointSide.RIGHT && side2 === segmentPointSide.LEFT ||
+    side1 === segmentPointSide.LEFT && side2 === segmentPointSide.RIGHT;
 }
 
 // segmentPointSide.LEFT = Symbol('segmentPointSide.LEFT');
