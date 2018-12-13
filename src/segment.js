@@ -19,7 +19,12 @@ export function segmentPointSide(point, segment, precision = 0) {
   } else if (side === pointLineSide.ABOVE) {
     result = segmentPointSide.ABOVE;
     const bbox = boundingBox(segment);
-    if (lt(point[0], bbox[0][0]) || gt(point[0], bbox[1][0]) || gt(point[1], bbox[0][1]) || lt(point[1], bbox[1][1])) {
+    if (
+      lt(point[0], bbox[0][0]) ||
+      gt(point[0], bbox[1][0]) ||
+      gt(point[1], bbox[0][1]) ||
+      lt(point[1], bbox[1][1])
+    ) {
       result = segmentPointSide.INLINE_OUTSIDE;
     }
   } else {

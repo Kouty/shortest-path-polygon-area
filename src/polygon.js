@@ -19,7 +19,7 @@ export function polyPointInside(poly, point, precision) {
     const leftRight2 = oneLeftOneRight(side2A, side2B);
     const aboveLeft1 = side2A === segmentPointSide.ABOVE && side2B === segmentPointSide.LEFT;
     const aboveLeft2 = side2A === segmentPointSide.LEFT && side2B === segmentPointSide.ABOVE;
-    if (leftRight1 && leftRight2 || aboveLeft1 || aboveLeft2) {
+    if ((leftRight1 && leftRight2) || aboveLeft1 || aboveLeft2) {
       intersectionCounter++;
     }
 
@@ -30,14 +30,11 @@ export function polyPointInside(poly, point, precision) {
 }
 
 function oneLeftOneRight(side1, side2) {
-  return side1 === segmentPointSide.RIGHT && side2 === segmentPointSide.LEFT ||
-    side1 === segmentPointSide.LEFT && side2 === segmentPointSide.RIGHT;
+  return (
+    (side1 === segmentPointSide.RIGHT && side2 === segmentPointSide.LEFT) ||
+    (side1 === segmentPointSide.LEFT && side2 === segmentPointSide.RIGHT)
+  );
 }
-
-// segmentPointSide.LEFT = Symbol('segmentPointSide.LEFT');
-// segmentPointSide.RIGHT = Symbol('segmentPointSide.RIGHT');
-// segmentPointSide.ABOVE = Symbol('segmentPointSide.ABOVE');
-// segmentPointSide.INLINE_OUTSIDE = Symbol('segmentPointSide.INLINE_OUTSIDE');
 
 polyPointInside.INSIDE = Symbol('polyPointInside.INSIDE');
 polyPointInside.ABOVE = Symbol('polyPointInside.ABOVE');
