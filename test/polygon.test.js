@@ -65,4 +65,15 @@ describe('polyPointInside', () => {
     triangle.reverse();
     expect(polyPointInside(triangle, [0, 1])).toBe(INSIDE);
   });
+
+  describe('precision', () => {
+    const precision = 0.1;
+    it('should return ABOVE for point [5, -0.01]', () => {
+      expect(polyPointInside(square, [5, -0.01], precision)).toBe(ABOVE);
+    });
+
+    it('should return ABOVE for point [5, 0.01]', () => {
+      expect(polyPointInside(square, [5, 0.01], precision)).toBe(ABOVE);
+    });
+  });
 });

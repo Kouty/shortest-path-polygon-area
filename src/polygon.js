@@ -1,12 +1,12 @@
 import { segmentPointSide } from './segment';
 
-export function polyPointInside(poly, point) {
+export function polyPointInside(poly, point, precision) {
   let prevPoint = poly[0];
   let intersectionCounter = 0;
   const halfLine = [point, [point[0], Number.POSITIVE_INFINITY]];
   for (let i = 1; i <= poly.length + 1; i++) {
     const segment = [prevPoint, poly[i >= poly.length ? 0 : i]];
-    const side1A = segmentPointSide(halfLine[0], segment);
+    const side1A = segmentPointSide(halfLine[0], segment, precision);
     const side1B = segmentPointSide(halfLine[1], segment);
     const side2A = segmentPointSide(segment[0], halfLine);
     const side2B = segmentPointSide(segment[1], halfLine);
