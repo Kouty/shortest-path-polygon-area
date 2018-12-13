@@ -77,3 +77,7 @@ describe('polyPointInside', () => {
     });
   });
 });
+
+describe('polySegmentInside', () => {
+
+});

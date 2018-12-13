@@ -39,3 +39,7 @@ function oneLeftOneRight(side1, side2) {
 polyPointInside.INSIDE = Symbol('polyPointInside.INSIDE');
 polyPointInside.ABOVE = Symbol('polyPointInside.ABOVE');
 polyPointInside.OUTSIDE = Symbol('polyPointInside.OUTSIDE');
+
+export function polySegmentInside() {
+
+}
