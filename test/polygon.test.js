@@ -133,6 +133,10 @@ describe('polySegmentInside', () => {
     expect(polySegmentInside(square, [[0, 0], [10, 0]])).toBe(ABOVE);
   });
 
+  it('should return OUTSIDE for segment [[-1,0],[10,0]]', () => {
+    expect(polySegmentInside(square, [[-1, 0], [10, 0]])).toBe(OUTSIDE);
+  });
+
   it('should return ABOVE for segment [[-0.01,0],[10.01,0]] and precision 0.1', () => {
     const precision = 0.1;
     expect(polySegmentInside(square, [[-0.01, 0], [10.01, 0]], precision)).toBe(ABOVE);
@@ -140,13 +144,19 @@ describe('polySegmentInside', () => {
 
   it('should return INSIDE for segment [[-0.01,5],[10.01,6]] and precision 0.1', () => {
     const precision = 0.1;
-    expect(polySegmentInside(square,  [[-0.01,5],[10.01,6]], precision)).toBe(INSIDE);
+    expect(polySegmentInside(square, [[-0.01, 5], [10.01, 6]], precision)).toBe(INSIDE);
   });
-});
 
-describe('complex cases', () => {
-  it('', () => {
-
+  it('|^-^| inside', () => {
+    const poly = [
+      [0, 0],
+      [0, 3],
+      [1, 2],
+      [3, 2],
+      [4, 3],
+      [4, 0]
+    ];
+    expect(polySegmentInside(poly, [[0, 2], [4, 2]])).toBe(INSIDE);
   });
 });
 
