@@ -1,4 +1,4 @@
-import { pointLineSide } from './pointLine';
+import { pointLineSide } from './point';
 import { boundingBox } from './boundingBox';
 
 export function segmentPointSide(point, segment, precision = 0) {

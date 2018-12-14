@@ -1,4 +1,4 @@
-import { pointLineDistance, pointLineSide } from '../src/pointLine';
+import { distance, pointLineDistance, pointLineSide } from '../src/point';
 
 describe('Point-line', () => {
   describe('side', () => {
@@ -124,5 +124,11 @@ describe('Point-line', () => {
         expect(pointLineDistance([-10, Inf], [[0, -Inf], [0, +Inf]])).toBe(10);
       });
     });
+  });
+});
+
+describe('Point to point distance', () => {
+  it('should return sqrt(2) for points [2,2], [3,3]', () => {
+    expect(distance([2, 2], [3, 3])).toBeCloseTo(Math.sqrt(2));
   });
 });

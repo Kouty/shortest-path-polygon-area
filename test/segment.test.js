@@ -1,5 +1,5 @@
 import { segmentPointSide } from '../src/segment';
-import * as pointModule from '../src/pointLine';
+import * as pointModule from '../src/point';
 
 xdescribe('Segment point side', () => {
   it('should use pointLineSide', () => {
