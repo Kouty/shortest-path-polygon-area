@@ -1,4 +1,4 @@
-import { polyPointInside, polySegmentInside } from '../src/polygon';
+import { middlePoint, polyPointInside, polySegmentInside } from '../src/polygon';
 
 describe('polyPointInside', () => {
   let square;
@@ -105,7 +105,17 @@ describe('polySegmentInside', () => {
     expect(polySegmentInside.CROSS).toBeDefined();
   });
 
-  it('should return cross for segment [[-3,5],[6,4]]', () => {
+  it('should return CROSS for segment [[-3,5],[6,4]]', () => {
     expect(polySegmentInside(square, [[-3, 5], [6, 4]])).toBe(CROSS);
+  });
+
+  xit('should return INSIDE for segment [[1,1],[9,9]]', () => {
+    expect(polySegmentInside(square, [[1, 1], [9, 9]])).toBe(INSIDE);
+  });
+});
+
+describe('middlePoint', () => {
+  it('should return [3,3] for segment [[0,0],[6,6]]', () => {
+    expect(middlePoint([[0, 0], [6, 6]])).toEqual([3, 3]);
   });
 });

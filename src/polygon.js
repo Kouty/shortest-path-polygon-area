@@ -5,7 +5,7 @@ export function polyPointInside(poly, point, precision) {
   const halfLine = [point, [point[0], Number.POSITIVE_INFINITY]];
   for (const segment of segmentsOfPolygon(poly)) {
     const res = segmentSegment(halfLine, segment, precision);
-    const {side1A, side2A, side2B} = res;
+    const { side1A, side2A, side2B } = res;
 
     if (side1A === segmentPointSide.ABOVE) {
       return polyPointInside.ABOVE;
@@ -33,11 +33,18 @@ polyPointInside.ABOVE = Symbol('polyPointInside.ABOVE');
 polyPointInside.OUTSIDE = Symbol('polyPointInside.OUTSIDE');
 
 export function polySegmentInside(poly, segment, precision) {
+  const toEvaluate = [segment];
   for (const pSegment of segmentsOfPolygon(poly)) {
     const res = segmentSegment(segment, pSegment);
     if (res.crosses()) {
       return polySegmentInside.CROSS;
     }
+  }
+
+  const oneInside = false;
+  const oneOutside = false;
+  for (const segment of toEvaluate) {
+
   }
 
 }
@@ -73,4 +80,8 @@ function segmentSegment(seg1, seg2, precision) {
       return oneLeftOneRight(side1A, side1B) && oneLeftOneRight(side2A, side2B);
     }
   };
+}
+
+export function middlePoint(seg) {
+  return [seg[0][0] + seg[1][0] / 2, seg[0][1] + seg[1][1] / 2];
 }
