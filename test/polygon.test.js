@@ -2,7 +2,8 @@ import {
   middlePoint,
   polyPointInside,
   polySegmentInside,
-  segmentsFromPoints, segmentsOfPolygon
+  segmentsFromPoints,
+  segmentsOfPolygon
 } from '../src/polygon';
 
 describe('polyPointInside', () => {
@@ -153,14 +154,7 @@ describe('polySegmentInside', () => {
   });
 
   it('|^-^| inside', () => {
-    const poly = [
-      [0, 0],
-      [0, 3],
-      [1, 2],
-      [3, 2],
-      [4, 3],
-      [4, 0]
-    ];
+    const poly = [[0, 0], [0, 3], [1, 2], [3, 2], [4, 3], [4, 0]];
     expect(polySegmentInside(poly, [[0, 2], [4, 2]])).toBe(INSIDE);
   });
 });
