@@ -2,7 +2,7 @@ import * as polySegmentModule from '../src/polygon';
 import { Area } from '../src/Area';
 import { polySegmentInside } from '../src/polygon';
 
-xdescribe('Area', () => {
+describe('Area', () => {
   let testArea;
 
   describe('bounds', () => {
@@ -24,6 +24,16 @@ xdescribe('Area', () => {
         segment,
         precision
       );
+    });
+
+    it('should return true if polySegmentInside returns ABOVE', () => {
+      const segment = {};
+      const precision = 0.1;
+      spyOn(polySegmentModule, 'polySegmentInside').and.returnValue(polySegmentInside.ABOVE);
+
+      const result = testArea.insideBounds(segment, precision);
+
+      expect(result).toBe(true);
     });
   });
 
@@ -48,6 +58,16 @@ xdescribe('Area', () => {
         precision
       );
     });
+
+    it('should use polySegmentInside to test if a segment is inside holes', () => {
+      const segment = {};
+      const precision = 0.1;
+      spyOn(polySegmentModule, 'polySegmentInside').and.returnValue(polySegmentInside.ABOVE);
+
+      const result = testArea.crossesHole(segment, precision);
+
+      expect(result).toBe(null);
+    });
   });
 
   describe('No holes or bounds', () => {
@@ -67,7 +87,7 @@ xdescribe('Area', () => {
       spyOn(testArea, 'insideBounds');
     });
 
-    it('should use hitsHole()', () => {
+    it('should use crossesHole()', () => {
       const segment = [[2, 2], [3, 3]];
       const precision = 0.1;
 

@@ -1,8 +1,8 @@
-// const AllowMutateEsmExportsPlugin = require('./AllowMutateEsmExportsPlugin.js');
+const AllowMutateEsmExportsPlugin = require('./AllowMutateEsmExportsPlugin.js');
 const webpackConf = require('./webpack.config.js');
 webpackConf.mode = 'development';
 webpackConf.devtool = 'eval-source-map';
-// webpackConf.plugins.push(new AllowMutateEsmExportsPlugin());
+webpackConf.plugins.push(new AllowMutateEsmExportsPlugin());
 
 module.exports = function(config) {
   config.set({
