@@ -109,13 +109,49 @@ describe('polySegmentInside', () => {
     expect(polySegmentInside(square, [[-3, 5], [6, 4]])).toBe(CROSS);
   });
 
-  xit('should return INSIDE for segment [[1,1],[9,9]]', () => {
+  it('should return INSIDE for segment [[1,1],[9,9]]', () => {
     expect(polySegmentInside(square, [[1, 1], [9, 9]])).toBe(INSIDE);
+  });
+
+  it('should return OUTSIDE for segment [[10,1],[12,9]]', () => {
+    expect(polySegmentInside(square, [[10, 1], [12, 9]])).toBe(OUTSIDE);
+  });
+
+  it('should return CROSS for segment [[-1,-1],[11,11]]', () => {
+    expect(polySegmentInside(square, [[-1, -1], [11, 11]])).toBe(CROSS);
+  });
+
+  it('should return INSIDE for segment [[0,0],[10,10]]', () => {
+    expect(polySegmentInside(square, [[0, 0], [10, 10]])).toBe(INSIDE);
+  });
+
+  it('should return INSIDE for segment [[0,5],[10,6]]', () => {
+    expect(polySegmentInside(square, [[0, 5], [10, 6]])).toBe(INSIDE);
+  });
+
+  it('should return ABOVE for segment [[0,0],[10,0]]', () => {
+    expect(polySegmentInside(square, [[0, 0], [10, 0]])).toBe(ABOVE);
+  });
+
+  it('should return ABOVE for segment [[-0.01,0],[10.01,0]] and precision 0.1', () => {
+    const precision = 0.1;
+    expect(polySegmentInside(square, [[-0.01, 0], [10.01, 0]], precision)).toBe(ABOVE);
+  });
+
+  it('should return INSIDE for segment [[-0.01,5],[10.01,6]] and precision 0.1', () => {
+    const precision = 0.1;
+    expect(polySegmentInside(square,  [[-0.01,5],[10.01,6]], precision)).toBe(INSIDE);
+  });
+});
+
+describe('complex cases', () => {
+  it('', () => {
+
   });
 });
 
 describe('middlePoint', () => {
-  it('should return [3,3] for segment [[0,0],[6,6]]', () => {
-    expect(middlePoint([[0, 0], [6, 6]])).toEqual([3, 3]);
+  it('should return [15,13] for segment [[10,10],[20,16]]', () => {
+    expect(middlePoint([[10, 10], [20, 16]])).toEqual([15, 13]);
   });
 });
