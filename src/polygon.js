@@ -92,7 +92,7 @@ polySegmentInside.OUTSIDE = Symbol('polySegmentInside.OUTSIDE');
 polySegmentInside.ABOVE = Symbol('polySegmentInside.ABOVE');
 polySegmentInside.CROSS = Symbol('polySegmentInside.CROSS');
 
-function segmentsFromPoints(points) {
+export function segmentsFromPoints(points) {
   const segments = [];
   for (let i = 1; i < points.length; i++) {
     segments.push([points[i - 1], points[i]]);
@@ -101,10 +101,10 @@ function segmentsFromPoints(points) {
   return segments;
 }
 
-function segmentsOfPolygon(poly) {
+export function segmentsOfPolygon(poly) {
   const segments = [];
   let prevPoint = poly[0];
-  for (let i = 1; i <= poly.length + 1; i++) {
+  for (let i = 1; i <= poly.length; i++) {
     const segment = [prevPoint, poly[i >= poly.length ? 0 : i]];
     segments.push(segment);
     prevPoint = segment[1];

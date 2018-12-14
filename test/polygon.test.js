@@ -1,4 +1,9 @@
-import { middlePoint, polyPointInside, polySegmentInside } from '../src/polygon';
+import {
+  middlePoint,
+  polyPointInside,
+  polySegmentInside,
+  segmentsFromPoints, segmentsOfPolygon
+} from '../src/polygon';
 
 describe('polyPointInside', () => {
   let square;
@@ -163,5 +168,26 @@ describe('polySegmentInside', () => {
 describe('middlePoint', () => {
   it('should return [15,13] for segment [[10,10],[20,16]]', () => {
     expect(middlePoint([[10, 10], [20, 16]])).toEqual([15, 13]);
+  });
+});
+
+describe('segmentsFromPoints', () => {
+  it('should return a list of segments given a list of points', () => {
+    const segments = segmentsFromPoints([[0, 0], [1, 1], [2, 3]]);
+
+    expect(segments.length).toBe(2);
+    expect(segments[0]).toEqual([[0, 0], [1, 1]]);
+    expect(segments[1]).toEqual([[1, 1], [2, 3]]);
+  });
+});
+
+describe('segmentsOfPolygon', () => {
+  it('should return a list of segments given a polygon', () => {
+    const segments = segmentsOfPolygon([[0, 0], [1, 1], [2, 3]]);
+
+    expect(segments.length).toBe(3);
+    expect(segments[0]).toEqual([[0, 0], [1, 1]]);
+    expect(segments[1]).toEqual([[1, 1], [2, 3]]);
+    expect(segments[2]).toEqual([[2, 3], [0, 0]]);
   });
 });
