@@ -1,4 +1,4 @@
-import { polyPointInside } from '../src/polygon';
+import { polyPointInside, polySegmentInside } from '../src/polygon';
 
 describe('polyPointInside', () => {
   let square;
@@ -79,5 +79,33 @@ describe('polyPointInside', () => {
 });
 
 describe('polySegmentInside', () => {
+  let square;
+  const INSIDE = polySegmentInside.INSIDE;
+  const OUTSIDE = polySegmentInside.OUTSIDE;
+  const ABOVE = polySegmentInside.ABOVE;
+  const CROSS = polySegmentInside.CROSS;
 
+  beforeEach(() => {
+    square = [[0, 0], [0, 10], [10, 10], [10, 0]];
+  });
+
+  it('should define INSIDE', () => {
+    expect(polySegmentInside.INSIDE).toBeDefined();
+  });
+
+  it('should define OUTSIDE', () => {
+    expect(polySegmentInside.OUTSIDE).toBeDefined();
+  });
+
+  it('should define ABOVE', () => {
+    expect(polySegmentInside.ABOVE).toBeDefined();
+  });
+
+  it('should define CROSS', () => {
+    expect(polySegmentInside.CROSS).toBeDefined();
+  });
+
+  it('should return cross for segment [[-3,5],[6,4]]', () => {
+    expect(polySegmentInside(square, [[-3, 5], [6, 4]])).toBe(CROSS);
+  });
 });
