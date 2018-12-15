@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shortest Path test</title>
+  <style>
+    html, body {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .palette {
+      border-bottom: 1px solid grey;
+      height: 30px;
+    }
+
+    #canvas {
+      margin: 0;
+      width: 100%;
+      height: calc(100% - 35px);
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="palette">
+    <button onclick="toggleArea()">Area</button>
+    <button onclick="toggleHole()">Hole</button>
+    <button onclick="clearCanvas()">Clear</button>
+  </div>
+  <canvas id="canvas"></canvas>
+</div>
+</body>
+</html>
