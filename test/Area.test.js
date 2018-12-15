@@ -11,6 +11,10 @@ describe('Area', () => {
       testArea = new Area({ bounds });
     });
 
+    it('should consider empty bounds as no bounds', () => {
+      expect(new Area({ bounds: [] }).insideBounds()).toBe(true);
+    });
+
     it('should use polySegmentInside to test if a segment is inside bounds', () => {
       const segment = {};
       const precision = 0.1;
