@@ -87,6 +87,7 @@ let state = HoleState;
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.lineWidth = 1;
   holes.forEach((hole, index) => {
     ctx.strokeStyle = '#000';
     drawPoly(hole, index < holes.length - 1);
@@ -95,6 +96,7 @@ function draw() {
   ctx.strokeStyle = '#006';
   drawPoly(bounds, boundsDone);
 
+  ctx.lineWidth = 2;
   ctx.strokeStyle = '#060';
   drawPoly(path, false);
 }

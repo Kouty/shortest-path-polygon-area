@@ -33,7 +33,7 @@ export class ShortestPath {
               nearestNode = node;
             }
 
-            if(segment[1] === to) {
+            if (segment[1] === to) {
               return true;
             }
           }
