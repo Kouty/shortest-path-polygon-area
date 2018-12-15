@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=500, initial-scale=1">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <title>Shortest Path test</title>
   <style>
     html, body {
@@ -17,9 +17,9 @@
       height: 100%;
     }
 
-    .palette {
-      border-bottom: 1px solid grey;
-      height: 30px;
+    .button-area {
+      background-color: lightgray;
+      height: 31px;
     }
 
     #canvas {
@@ -27,11 +27,16 @@
       width: 100%;
       height: calc(100% - 35px);
     }
+
+    button {
+      min-width: 70px;
+      height: 30px;
+    }
   </style>
 </head>
 <body>
 <div class="container">
-  <div class="palette">
+  <div class="button-area">
     <button onclick="toggleBounds()">Bounds</button>
     <button onclick="toggleHole()">Hole</button>
     <button onclick="togglePath()">Find Path</button>
