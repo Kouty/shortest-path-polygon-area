@@ -7,6 +7,9 @@ export class Area {
   }
 
   insideBounds(segment, precision) {
+    if (this.bounds.length === 0) {
+      return true;
+    }
     const result = polySegmentInside(this.bounds, segment, precision);
     return result === polySegmentInside.INSIDE || result === polySegmentInside.ABOVE;
   }
