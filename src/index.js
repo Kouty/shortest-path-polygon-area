@@ -20,7 +20,7 @@ let to = null;
 let path = [];
 
 const HoleState = {
-  name: 'HoleState',
+  name: 'hole',
   onStateEnter() {
     // NOP
   },
@@ -38,8 +38,8 @@ const HoleState = {
   }
 };
 
-const AreaState = {
-  name: 'AreaState',
+const BoundsState = {
+  name: 'bounds',
   onStateEnter() {
     bounds = [];
     boundsDone = false;
@@ -56,7 +56,7 @@ const AreaState = {
 };
 
 const PathState = {
-  name: 'PathState',
+  name: 'path',
   onStateEnter() {
     from = null;
     to = null;
@@ -82,8 +82,8 @@ const PathState = {
     // NOP
   }
 };
-
 let state = HoleState;
+switchState(HoleState);
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -133,7 +133,7 @@ canvas.oncontextmenu = () => {
 };
 
 function toggleBounds() {
-  switchState(AreaState);
+  switchState(BoundsState);
 }
 
 function toggleHole() {
@@ -148,6 +148,12 @@ function switchState(newState) {
   state.onChangeState(newState);
   state = newState;
   state.onStateEnter();
+  document.querySelectorAll('button').forEach(button => {
+    button.style.borderColor = '';
+  });
+  const selected = document.querySelector('.' + state.name);
+  selected.style.borderColor = 'orange';
+
   draw();
 }
 
