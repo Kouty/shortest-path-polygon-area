@@ -3,14 +3,6 @@ import { ShortestPath } from './ShortestPath';
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 
-function updateCanvasSize() {
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-}
-
-updateCanvasSize();
-window.onresize = updateCanvasSize;
-
 let crtHole = [];
 let holes = [crtHole];
 let bounds = [];
@@ -18,6 +10,15 @@ let boundsDone = false;
 let from = null;
 let to = null;
 let path = [];
+
+function updateCanvasSize() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+  draw();
+}
+
+updateCanvasSize();
+window.onresize = updateCanvasSize;
 
 const HoleState = {
   name: 'hole',

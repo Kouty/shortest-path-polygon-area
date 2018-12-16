@@ -1,9 +1,14 @@
-export function pointLineSide([x, y], [[x1, y1], [x2, y2]], precision = 0) {
-  const dist = pointLineDistance([x, y], [[x1, y1], [x2, y2]]);
+export function pointLineSide(point, line, precision = 0) {
+  const dist = pointLineDistance(point, line);
   if (dist <= precision) {
     return pointLineSide.ABOVE;
   }
-
+  const x = point[0];
+  const y = point[1];
+  const x1 = line[0][0];
+  const y1 = line[0][1];
+  const x2 = line[1][0];
+  const y2 = line[1][1];
   const a = x - x1 === 0 || y2 - y1 === 0 ? 0 : (x - x1) * (y2 - y1);
   const b = y - y1 === 0 || x2 - x1 === 0 ? 0 : (y - y1) * (x2 - x1);
   const res = a - b;
@@ -14,7 +19,14 @@ pointLineSide.LEFT = Symbol('pointLineSide.LEFT');
 pointLineSide.RIGHT = Symbol('pointLineSide.RIGHT');
 pointLineSide.ABOVE = Symbol('pointLineSide.ABOVE');
 
-export function pointLineDistance([x, y], [[x1, y1], [x2, y2]]) {
+export function pointLineDistance(point, line) {
+  const x = point[0];
+  const y = point[1];
+  const x1 = line[0][0];
+  const y1 = line[0][1];
+  const x2 = line[1][0];
+  const y2 = line[1][1];
+
   if (!Number.isFinite(y1)) {
     return Math.abs(x2 - x);
   }
