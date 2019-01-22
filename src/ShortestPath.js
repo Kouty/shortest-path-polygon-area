@@ -14,6 +14,7 @@ export class ShortestPath {
 
     let moreNodesToEvaluate;
     let result = [];
+    const segmentMap =  new Map();
     do {
       moreNodesToEvaluate = false;
       let minDist = Number.POSITIVE_INFINITY;
@@ -24,7 +25,13 @@ export class ShortestPath {
       for (const node of it) {
         verticesToEvaluate.some((vertex, index) => {
           const segment = [node.value.point, vertex];
-          if (this.area.insideArea(segment, precision)) {
+          const key = JSON.stringify(segment);
+          let insideArea = segmentMap.get(key);
+          if(insideArea === undefined) {
+            insideArea = this.area.insideArea(segment, precision);
+            segmentMap.set(key, insideArea);
+          }
+          if (insideArea) {
             moreNodesToEvaluate = true;
             const dist = distance(segment[0], segment[1]) + node.value.dist;
             if (dist < minDist) {
