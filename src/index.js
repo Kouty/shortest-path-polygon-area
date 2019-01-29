@@ -72,6 +72,7 @@ const PathState = {
     } else if (to === null) {
       to = point;
       path = new ShortestPath({ bounds, holes }).calculate({ from, to }, 0.1);
+      console.log(JSON.stringify({ holes, bounds, from, to }));
     }
   },
   onRightClick() {

@@ -8,10 +8,11 @@ module.exports = function(config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
-    files: ['test/**/*.test.js'],
+    files: ['test/**/*.test.js', 'performance.test/**/*.test.js'],
     exclude: [],
     preprocessors: {
-      'test/*.test.js': ['webpack']
+      'test/**/*.test.js': ['webpack'],
+      'performance.test/**/*.test.js': ['webpack']
     },
     webpack: webpackConf,
     reporters: ['progress'],

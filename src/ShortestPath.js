@@ -7,14 +7,14 @@ export class ShortestPath {
     this.area = new Area({ bounds, holes });
   }
 
-  calculate({ from, to }, precision) {
+  calculate({ from, to, useCache = true }, precision) {
     const verticesToEvaluate = this.area.allVertices();
     verticesToEvaluate.push(to);
     const tree = new Tree(new TreeNode({ point: from, dist: 0 }));
 
     let moreNodesToEvaluate;
     let result = [];
-    const segmentMap =  new Map();
+    const segmentMap = new Map();
     do {
       moreNodesToEvaluate = false;
       let minDist = Number.POSITIVE_INFINITY;
@@ -27,9 +27,11 @@ export class ShortestPath {
           const segment = [node.value.point, vertex];
           const key = JSON.stringify(segment);
           let insideArea = segmentMap.get(key);
-          if(insideArea === undefined) {
+          if (insideArea === undefined) {
             insideArea = this.area.insideArea(segment, precision);
-            segmentMap.set(key, insideArea);
+            if (useCache) {
+              segmentMap.set(key, insideArea);
+            }
           }
           if (insideArea) {
             moreNodesToEvaluate = true;
