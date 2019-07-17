@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --compress",
     "build": "webpack --mode production",
+    "build-lib": "webpack --config webpack.lib.config.js --mode production",
     "test": "karma start",
     "prettier": "prettier --write ./src/**/*.js ./test/**/*.js",
     "eslint": "eslint ./src/**/*.js ./test/**/*.js "
